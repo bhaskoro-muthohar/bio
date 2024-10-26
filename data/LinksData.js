@@ -64,7 +64,7 @@ const webLinks = [
     {
         title: 'Credit Scoring Pipeline',
         subdesc: '🚀 End-to-end ML pipeline with FastAPI and ensemble learning',
-        url: 'https://github.com/yourusername/credit-scoring',
+        url: 'https://github.com/bhaskoro-muthohar/Credit-Scoring-Deployment',
         type: 'other',
         icon: '/github.svg',
         on: true
