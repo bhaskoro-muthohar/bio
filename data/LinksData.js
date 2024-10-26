@@ -30,7 +30,16 @@ const webLinks = [
         on: true
     },
     {
+        title: 'RealEstimate',
+        subdesc: '🏠 FastAPI-based web application for real estate calculations, providing a user-friendly interface for mortgage payment calculations and rent vs. buy comparisons',
+        url: 'https://github.com/bhaskoro-muthohar/RealEstimate',
+        type: 'other',
+        icon: '/github.svg',
+        on: true
+    },
+    {
         title: 'Kalender Padi Nusantara',
+        subdesc: '🏆 UN Datathon 2023 Winner - Best Team in Asia',
         url: 'https://github.com/bhaskoro-muthohar/KaPaN',
         type: 'other',
         icon: '/github.svg',
@@ -38,6 +47,7 @@ const webLinks = [
     },
     {
         title: 'Oeroenremboog 2023',
+        subdesc: '📊 Data visualization using Python, Streamlit, and DuckDB',
         url: 'https://github.com/bhaskoro-muthohar/oeroenremboog',
         type: 'other',
         icon: '/github.svg',
@@ -45,6 +55,7 @@ const webLinks = [
     },
     {
         title: 'Auto Paired T-test',
+        subdesc: '🔄 Automated statistical testing with CI/CD integration',
         url: 'https://github.com/bhaskoro-muthohar/auto-paired-ttest',
         type: 'other',
         icon: '/github.svg',
@@ -52,6 +63,7 @@ const webLinks = [
     },
     {
         title: 'Credit Scoring Pipeline',
+        subdesc: '🚀 End-to-end ML pipeline with FastAPI and ensemble learning',
         url: 'https://github.com/yourusername/credit-scoring',
         type: 'other',
         icon: '/github.svg',
@@ -59,6 +71,7 @@ const webLinks = [
     },
     {
         title: 'A/B Testing Case Study',
+        subdesc: '📈 Achieved 590% user funnel increase in 2 months',
         url: 'https://medium.com/govtech-edu/experimentation-culture-at-govtech-edu-how-we-utilize-a-b-testing-method-to-build-data-driven-a9a00c14c1a4',
         type: 'other',
         icon: '/medium.svg',
@@ -67,4 +80,3 @@ const webLinks = [
 ];
 
 export default webLinks;
-

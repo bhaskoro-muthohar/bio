@@ -9,7 +9,7 @@ const bioData = [
         nftAvatar: true,
         description: 'Analytics Engineer with expertise in data engineering and machine learning. Currently building data solutions at Govtech Edu Indonesia. Previously @ Bank Jago and AFPI.',
         descShow: true,
-        subdesc: 'Python | SQL | BigQuery | dbt | Airflow | Machine Learning | Business Intelligence',
+        subdesc: 'Machine Learning Engineering (Model Deployment & MLOps) \nData Engineering (Python, SQL, GCP, Kubernetes, CI/CD) \nAnalytics Engineering (dbt, Airflow, BigQuery)',
         subdescShow: true,
         newProductUrl: 'https://github.com/bhaskoro-muthohar/RealEstimate',
         newProduct: true,
