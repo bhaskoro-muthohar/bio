@@ -3,7 +3,7 @@ const bioData = [
     {
         name: 'Bhaskoro Muthohar',
         username: 'Bhas',
-        url: 'https://nxtlnk.vercel.app',
+        url: 'https://itsmebhas.net',
         titleImg: false,
         avatar: '/1693816359351.jpeg',
         nftAvatar: true,
