@@ -1,25 +1,21 @@
 // date: 1 Aug, 2022
 const bioData = [
     {
-        name: 'nxt lnk',
-        username: 'nxtlnk.vercel.app',
+        name: 'Bhaskoro Muthohar',
+        username: 'Bhas',
         url: 'https://nxtlnk.vercel.app',
-        titleImg: true,
-        avatar: '/avatar.png',
+        titleImg: false,
+        avatar: '/1693816359351.jpeg',
         nftAvatar: true,
-        description: 'Custom bio links for creatives who love coding. Made this first to use for my own weblinks vjy.me/lnk. ',
+        description: 'Analytics Engineer with expertise in data engineering and machine learning. Currently building data solutions at Govtech Edu Indonesia. Previously @ Bank Jago and AFPI.',
         descShow: true,
-        subdesc: 'Use this template and deploy on vercel for free',
+        subdesc: 'Python | SQL | BigQuery | dbt | Airflow | Machine Learning | Business Intelligence',
         subdescShow: true,
-        newProductUrl: 'https://3dicons.co',
+        newProductUrl: 'https://github.com/bhaskoro-muthohar/RealEstimate',
         newProduct: true,
-        author: 'realvjy',
-        authorURL: 'https://twitter.com/realvjy',
-        footerText: 'made by'
     },
 ];
 
 export default bioData;
-
 
 

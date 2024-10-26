@@ -3,164 +3,68 @@ const webLinks = [
     // All social profile
     {
         title: 'Twitter',
-        url: 'https://twitter.com/realvjy',
+        url: 'https://twitter.com/Br__AM',
         type: 'social',
         icon: '/twitter.svg',
         on: true
     },
     {
         title: 'Instagram',
-        url: 'https://instagram.com/realvjy',
+        url: 'https://instagram.com/bhaskoro.muthohar',
         type: 'social',
         icon: '/insta.svg',
         on: true
     },
     {
-        title: 'Dribbble',
-        url: 'https://dribbble.com/realvjy',
-        type: 'social',
-        icon: '/dribbble.svg',
-        on: false
-    },
-    {
-        title: 'Medium',
-        url: 'https://medium.com/@realvjy',
-        type: 'social',
-        icon: '/medium.svg',
-        on: false
-    },
-    {
         title: 'Github',
-        url: 'https://github.com/realvjy',
+        url: 'https://github.com/bhaskoro-muthohar',
         type: 'social',
         icon: '/github.svg',
         on: true
     },
     {
-        title: 'Youtube',
-        url: 'https://youtube.com/realvjy',
-        type: 'social',
-        icon: '/youtube.svg',
-        on: false
-    },
-    {
-        title: 'Figma',
-        url: 'https://figma.com/@realvjy',
-        type: 'social',
-        icon: '/figma.svg',
-        on: true
-    },
-    {
-        title: 'Behance',
-        url: 'https://behance.net/realvjy',
-        type: 'social',
-        icon: '/behance.svg',
-        on: false
-    },
-    {
         title: 'Linkedin',
-        url: 'https://www.linkedin.com/in/realvjy/',
+        url: 'https://www.linkedin.com/in/bhaskoro-muthohar',
         type: 'social',
         icon: '/linkedin.svg',
-        on: false
-    },
-    {
-        title: 'Mastodon',
-        url: 'https://mastodon.online/@realvjy',
-        type: 'social',
-        icon: '/mastodon.svg',
         on: true
     },
     {
-        title: 'Hive Social',
-        url: 'https://www.hivesocial.app/?@realvjy',
-        type: 'social',
-        icon: '/hive.svg',
-        on: false
-    },
-    {
-        title: 'Post',
-        url: 'https://www.post.news/realvjy',
-        type: 'social',
-        icon: '/post.svg',
-        on: false
-    },
-    {
-        title: 'foundation',
-        url: 'https://vjy.me',
-        type: 'nft',
-        icon: '/foundation.svg',
-        on: false
-    },
-    {
-        title: 'opensea',
-        url: 'https://vjy.me',
-        type: 'nft',
-        icon: '/opensea.svg',
-        on: false
-    },
-    {
-        title: 'new collection',
-        url: 'https://vjy.me',
-        type: 'nft',
-        icon: '/opensea.svg',
-        on: false
-    },
-    // Install section
-    {
-        title: 'Use this template',
-        url: 'https://github.com/realvjy/nxt-lnk/generate',
-        type: 'install',
-        icon: '/use.png',
-        on: true
-    },
-    {
-        title: 'Deploy on Vercel',
-        url: 'https://vercel.com/import/git?s=https://github.com/realvjy/nxt-lnk',
-        type: 'install',
-        icon: '/vercel.svg',
-        on: true
-    },
-    {
-        title: 'Documentation',
-        url: 'https://github.com/realvjy/nxt-lnk#nxt-lnk',
-        type: 'install',
-        icon: '/doc.png',
-        on: true
-    },
-    {
-        title: 'Github',
-        url: 'https://github.com/realvjy/nxt-lnk',
-        type: 'install',
-        icon: '/github-fill.svg',
-        on: true
-    },
-
-    {
-        title: 'Buy Me a Coffee',
-        url: 'https://www.buymeacoffee.com/realvjy',
+        title: 'Kalender Padi Nusantara',
+        url: 'https://github.com/bhaskoro-muthohar/KaPaN',
         type: 'other',
-        icon: '/bmc.png',
+        icon: '/github.svg',
         on: true
     },
-
     {
-        title: 'link demo',
-        url: 'https://vjy.me/lnk',
+        title: 'Oeroenremboog 2023',
+        url: 'https://github.com/bhaskoro-muthohar/oeroenremboog',
         type: 'other',
-        icon: '/vjy.png',
+        icon: '/github.svg',
         on: true
     },
-
     {
-        title: 'maker website',
-        url: 'https://vjy.me',
+        title: 'Auto Paired T-test',
+        url: 'https://github.com/bhaskoro-muthohar/auto-paired-ttest',
         type: 'other',
-        icon: '/vjy.png',
+        icon: '/github.svg',
         on: true
     },
+    {
+        title: 'Credit Scoring Pipeline',
+        url: 'https://github.com/yourusername/credit-scoring',
+        type: 'other',
+        icon: '/github.svg',
+        on: true
+    },
+    {
+        title: 'A/B Testing Case Study',
+        url: 'https://medium.com/govtech-edu/experimentation-culture-at-govtech-edu-how-we-utilize-a-b-testing-method-to-build-data-driven-a9a00c14c1a4',
+        type: 'other',
+        icon: '/medium.svg',
+        on: true
+    }
 ];
 
 export default webLinks;
-
 
