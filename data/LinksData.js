@@ -2,20 +2,6 @@
 const webLinks = [
     // All social profile
     {
-        title: 'Twitter',
-        url: 'https://twitter.com/Br__AM',
-        type: 'social',
-        icon: '/twitter.svg',
-        on: true
-    },
-    {
-        title: 'Instagram',
-        url: 'https://instagram.com/bhaskoro.muthohar',
-        type: 'social',
-        icon: '/insta.svg',
-        on: true
-    },
-    {
         title: 'Github',
         url: 'https://github.com/bhaskoro-muthohar',
         type: 'social',
@@ -27,6 +13,20 @@ const webLinks = [
         url: 'https://www.linkedin.com/in/bhaskoro-muthohar',
         type: 'social',
         icon: '/linkedin.svg',
+        on: true
+    },
+    {
+        title: 'Twitter',
+        url: 'https://twitter.com/Br__AM',
+        type: 'social',
+        icon: '/twitter.svg',
+        on: true
+    },
+    {
+        title: 'Instagram',
+        url: 'https://instagram.com/bhaskoro.muthohar',
+        type: 'social',
+        icon: '/insta.svg',
         on: true
     },
     {
