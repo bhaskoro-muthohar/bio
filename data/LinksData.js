@@ -30,6 +30,14 @@ const webLinks = [
         on: true
     },
     {
+        title: 'CoMaGraph',
+        subdesc: "🔄 💬 🧠 CoMaGraph is a context management system that uses graph database (Neo4j) to store conversational data and OpenAI's embeddings to enable semantic search and context retrieval. The system maintains conversation threads, analyzes message patterns, and provides insights into conversation dynamics.",
+        url: 'https://github.com/bhaskoro-muthohar/CoMaGraph',
+        type: 'other',
+        icon: '/github.svg',
+        on: true
+    },
+    {
         title: 'RealEstimate',
         subdesc: '🏠 FastAPI-based web application for real estate calculations, providing a user-friendly interface for mortgage payment calculations and rent vs. buy comparisons',
         url: 'https://github.com/bhaskoro-muthohar/RealEstimate',
