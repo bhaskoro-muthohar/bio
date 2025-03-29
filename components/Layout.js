@@ -14,9 +14,13 @@ export default function Layout({ children }) {
 const Main = styled.main`
   min-height: 100vh;
   background: url('/bg.png') no-repeat;
-  background-size: 100%;
-  background-position: -50vh 10%;
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
+  @media screen and (max-width: ${({ theme }) => theme.deviceSize.laptop}) {
+    background-size: 150%;
+    background-position: -20vh 10%;
+  }
   @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
     background-size: 250%;
     background-position: -50vh 30vh;

@@ -158,7 +158,7 @@ const Links = () => {
             <div className="projects-container">
               {Object.entries(projectCategories).map(([category, projects]) => (
                 projects.length > 0 && (
-                  <LinkSection key={category}>
+                  <LinkSection key={category} className="project-section">
                     <h3>{category}</h3>
                     {projects.map((project) => (
                       <a
@@ -166,6 +166,7 @@ const Links = () => {
                         key={project.title}
                         target="_blank"
                         rel="noreferrer"
+                        className="project-link"
                       >
                         <LinkBox>
                           <LinkTitle>
@@ -188,7 +189,7 @@ const Links = () => {
 
             {/* Articles Section */}
             {articles.length > 0 && (
-              <LinkSection>
+              <LinkSection className="project-section">
                 <h3>Articles</h3>
                 {articles.map((i) => (
                   <a
@@ -196,6 +197,7 @@ const Links = () => {
                     key={i.title}
                     target="_blank"
                     rel="noreferrer"
+                    className="project-link"
                   >
                     <LinkBox>
                       <LinkTitle>
@@ -216,7 +218,7 @@ const Links = () => {
 
             {/* Other Section */}
             {others.length > 0 && (
-              <LinkSection>
+              <LinkSection className="project-section">
                 <h3>{others[0].type}</h3>
                 {others.map((i) => (
                   <a
@@ -224,6 +226,7 @@ const Links = () => {
                     key={i.title}
                     target="_blank"
                     rel="noreferrer"
+                    className="project-link"
                   >
                     <LinkBox>
                       <LinkTitle>
@@ -269,12 +272,18 @@ const LinkContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  padding: 24px;
-  max-width: 700px;
+  padding: 40px;
+  max-width: 900px;
   margin: 0 auto;
   width: 100%;
   
+  @media screen and (max-width: ${({ theme }) => theme.deviceSize.laptop}) {
+    max-width: 800px;
+    padding: 32px;
+  }
+  
   @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
+    max-width: 700px;
     padding: 16px;
   }
 `;
@@ -449,13 +458,28 @@ const LinkFoot = styled.div`
 
 const WebLinkWrap = styled.div`
   width: 100%;
-  max-width: 500px;
+  max-width: 900px;
   margin: 0 auto;
   
   .projects-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .project-section {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .project-link {
+    width: 100%;
+    display: block;
+  }
+  
+  @media screen and (max-width: ${({ theme }) => theme.deviceSize.laptop}) {
+    max-width: 700px;
   }
   
   @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
@@ -468,12 +492,18 @@ const LinkSection = styled.div`
   padding: 12px 0;
   display: flex;
   margin: 0 auto;
-  max-width: 450px;
+  width: 100%;
+  max-width: 800px;
   flex-direction: column;
   &.social {
     max-width: max-content;
     padding: 14px 0;
     margin-bottom: 24px;
+  }
+  
+  &.project-section {
+    max-width: 800px;
+    width: 100%;
   }
   .iconsonly {
     display: flex;
@@ -511,8 +541,9 @@ const LinkBox = styled.div`
   font-weight: 600;
   letter-spacing: -0.5px;
   position: relative;
-  text-align: center;
+  text-align: left;
   width: 100%;
+  max-width: 100%;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
   &::before {
