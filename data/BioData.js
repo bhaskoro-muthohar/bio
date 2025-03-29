@@ -1,4 +1,4 @@
-// date: 1 Aug, 2022
+// date: 29 Mar, 2025
 const bioData = [
     {
         name: 'Bhaskoro Muthohar',
@@ -7,12 +7,15 @@ const bioData = [
         titleImg: false,
         avatar: '/1693816359351.jpeg',
         nftAvatar: true,
-        description: 'Analytics Engineer with expertise in data engineering and machine learning. Currently building data solutions at Govtech Edu Indonesia. Previously @ Bank Jago and AFPI.',
+        description: 'Analytics Engineer with expertise in data engineering and machine learning. Currently a Data Engineer at StraitsX, focusing on maintaining ML infrastructure. Previously @ Govtech Edu IDN and Bank Jago.',
         descShow: true,
-        subdesc: 'Machine Learning Engineering (Model Deployment & MLOps) \nData Engineering (Python, SQL, GCP, Kubernetes, CI/CD) \nAnalytics Engineering (dbt, Airflow, BigQuery)',
+        subdesc: 'Machine Learning Engineering (Model Deployment & MLOps) \nData Engineering (Python, SQL, GCP, Kubernetes, CI/CD) \nAnalytics Engineering (dbt, Airflow, BigQuery)',        
         subdescShow: true,
         newProductUrl: 'https://github.com/bhaskoro-muthohar/RealEstimate',
         newProduct: true,
+        footerText: '© 2025 Bhaskoro Muthohar',
+        author: '',
+        authorURL: ''
     },
 ];
 

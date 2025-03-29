@@ -4,9 +4,9 @@ export default {
         locale: 'en_IE',
         title: 'Bhaskoro Muthohar | Analytics Engineer',
         url: 'https://www.itsmebhas.net/',
-        description: 'Analytics Engineer with expertise in data engineering and machine learning. Currently building data solutions at Govtech Edu Indonesia.',
+        description: 'Analytics Engineer with expertise in data engineering and machine learning. Currently a Data Engineer at StraitsX, focusing on maintaining ML infrastructure.',
         locale: 'en_EN',
-        keywords: 'analytics engineer, data engineer, machine learning engineer, python developer, sql, bigquery, dbt, airflow, business intelligence, data science, govtech edu indonesia, bank jago, bhaskoro muthohar',
+        keywords: 'analytics engineer, data engineer, machine learning engineer, mlops, python developer, sql, bigquery, dbt, airflow, business intelligence, data science, kubernetes, CI/CD, GCP, straitsx, bhaskoro muthohar',
         images: [
             {
                 width: 1200,
