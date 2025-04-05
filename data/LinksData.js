@@ -47,6 +47,15 @@ const webLinks = [
     icon: "/github.svg",
     on: true,
   },
+  // Web Applications Projects
+  {
+    title: "RealEstimate",
+    subdesc: "🏠 FastAPI-based web application for real estate calculations",
+    url: "https://github.com/bhaskoro-muthohar/RealEstimate",
+    type: "Web Applications",
+    icon: "/github.svg",
+    on: true,
+  },
   // Data Engineering & Analytics Projects
   {
     title: "Kalender Padi Nusantara",
@@ -69,15 +78,6 @@ const webLinks = [
     subdesc: "🔄 Automated statistical testing with CI/CD integration",
     url: "https://github.com/bhaskoro-muthohar/auto-paired-ttest",
     type: "Data Analytics",
-    icon: "/github.svg",
-    on: true,
-  },
-  // Web Applications
-  {
-    title: "RealEstimate",
-    subdesc: "🏠 FastAPI-based web application for real estate calculations",
-    url: "https://github.com/bhaskoro-muthohar/RealEstimate",
-    type: "Web Applications",
     icon: "/github.svg",
     on: true,
   },
