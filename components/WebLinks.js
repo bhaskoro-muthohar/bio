@@ -64,16 +64,22 @@ const Links = () => {
   });
 
   // Get data for all project types and group by category
-  const projectCategories = allLinks.filter(el => {
-    return ["ML Engineering", "Data Analytics", "Web Applications"].includes(el.type) && el.on;
-  }).reduce((acc, project) => {
-    if (!acc[project.type]) {
-      acc[project.type] = [];
-    }
-    acc[project.type].push(project);
-    return acc;
-  }, {});
-  
+  const projectCategories = allLinks
+    .filter((el) => {
+      return (
+        ["ML Engineering", "Data Analytics", "Web Applications"].includes(
+          el.type
+        ) && el.on
+      );
+    })
+    .reduce((acc, project) => {
+      if (!acc[project.type]) {
+        acc[project.type] = [];
+      }
+      acc[project.type].push(project);
+      return acc;
+    }, {});
+
   // Get individual project arrays for backward compatibility
   const mlEngProjects = projectCategories["ML Engineering"] || [];
   const dataEngProjects = projectCategories["Data Analytics"] || [];
@@ -101,20 +107,31 @@ const Links = () => {
                 <OvalIcon />
                 <div className={`${avatarShape} avatar-border`}></div>
                 <div className={`${avatarShape} avatar-fill`}></div>
-                <img src={avatarImg} className={avatarShape} alt="Bhaskoro Abdillah Muthohar - Analytics Engineer" loading="lazy" />
+                <img
+                  src={avatarImg}
+                  className={avatarShape}
+                  alt="Bhaskoro Abdillah Muthohar - Analytics Engineer"
+                  loading="lazy"
+                />
               </AvatarWrap>
             </Avatar>
             <Title>
               {/* Using titleimg flag to use image as title or text */}
               {titleImg ? (
-                <img src={titleImage} className="handle" alt="Bhaskoro Abdillah Muthohar" />
+                <img
+                  src={titleImage}
+                  className="handle"
+                  alt="Bhaskoro Abdillah Muthohar"
+                />
               ) : (
                 <h1>Bhaskoro Abdillah Muthohar</h1>
               )}
               {/* if your remove username from data it will not appear */}
               {username ? (
                 <h3>
-                  <a href={`${url}`} title="Bhaskoro Muthohar's Website">{username}</a>
+                  <a href={`${url}`} title="Bhaskoro Muthohar's Website">
+                    {username}
+                  </a>
                 </h3>
               ) : (
                 ""
@@ -133,7 +150,7 @@ const Links = () => {
           <WebLinkWrap>
             {/* Social Icons */}
             <LinkSection className="social">
-              <h3>Connect with Bhaskoro</h3>
+              <h3>Connect with Bhas</h3>
               <div className="iconsonly">
                 {social.map((i) => {
                   return (
@@ -145,7 +162,11 @@ const Links = () => {
                       aria-label={i.title}
                     >
                       <LinkBox className="socialIcon" title={i.title}>
-                        <img src={i.icon} style={{ filter: "var(--img)" }} alt={i.title} />
+                        <img
+                          src={i.icon}
+                          style={{ filter: "var(--img)" }}
+                          alt={i.title}
+                        />
                       </LinkBox>
                     </a>
                   );
@@ -156,34 +177,41 @@ const Links = () => {
 
             {/* Projects Sections */}
             <div className="projects-container">
-              {Object.entries(projectCategories).map(([category, projects]) => (
-                projects.length > 0 && (
-                  <LinkSection key={category} className="project-section">
-                    <h3>{category}</h3>
-                    {projects.map((project) => (
-                      <a
-                        href={project.url}
-                        key={project.title}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="project-link"
-                      >
-                        <LinkBox>
-                          <LinkTitle>
-                            <div style={{ display: "flex", alignItems: "center" }}>
-                              <img src={project.icon} alt={project.title} /> {project.title}
-                            </div>
-                            {project.subdesc && (
-                              <div className="subdesc">{project.subdesc}</div>
-                            )}
-                          </LinkTitle>
-                          <NewUp />
-                        </LinkBox>
-                      </a>
-                    ))}
-                  </LinkSection>
-                )
-              ))}
+              {Object.entries(projectCategories).map(
+                ([category, projects]) =>
+                  projects.length > 0 && (
+                    <LinkSection key={category} className="project-section">
+                      <h3>{category}</h3>
+                      {projects.map((project) => (
+                        <a
+                          href={project.url}
+                          key={project.title}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="project-link"
+                        >
+                          <LinkBox>
+                            <LinkTitle>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <img src={project.icon} alt={project.title} />{" "}
+                                {project.title}
+                              </div>
+                              {project.subdesc && (
+                                <div className="subdesc">{project.subdesc}</div>
+                              )}
+                            </LinkTitle>
+                            <NewUp />
+                          </LinkBox>
+                        </a>
+                      ))}
+                    </LinkSection>
+                  )
+              )}
             </div>
             {/* End Projects Sections */}
 
@@ -276,12 +304,12 @@ const LinkContainer = styled.div`
   max-width: 900px;
   margin: 0 auto;
   width: 100%;
-  
+
   @media screen and (max-width: ${({ theme }) => theme.deviceSize.laptop}) {
     max-width: 800px;
     padding: 32px;
   }
-  
+
   @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
     max-width: 700px;
     padding: 16px;
@@ -389,12 +417,18 @@ const LinkBio = styled.div`
   text-align: center;
   opacity: 0; /* Start with 0 opacity for fade-in animation */
   animation: fadeIn 0.8s ease-in-out forwards;
-  
+
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  
+
   h2 {
     font-size: 20px;
     line-height: 1.6;
@@ -468,28 +502,28 @@ const WebLinkWrap = styled.div`
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  
+
   .projects-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 100%;
   }
-  
+
   .project-section {
     width: 100%;
     max-width: 100%;
   }
-  
+
   .project-link {
     width: 100%;
     display: block;
   }
-  
+
   @media screen and (max-width: ${({ theme }) => theme.deviceSize.laptop}) {
     max-width: 700px;
   }
-  
+
   @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
     padding: 0;
     max-width: 100%;
@@ -508,12 +542,12 @@ const LinkSection = styled.div`
     padding: 14px 0;
     margin-bottom: 24px;
   }
-  
+
   &.project-section {
     max-width: 800px;
     width: 100%;
   }
-  
+
   .iconsonly {
     display: flex;
     justify-content: center;
@@ -524,7 +558,7 @@ const LinkSection = styled.div`
       gap: 12px;
     }
   }
-  
+
   h3 {
     font-size: 13px;
     text-transform: uppercase;
@@ -594,12 +628,12 @@ const LinkBox = styled.div`
     align-items: center;
     justify-content: center;
     transition: transform 0.2s ease, background-color 0.2s ease;
-    
+
     &:hover {
       transform: translateY(-3px);
       background-color: ${({ theme }) => theme.bg.tertiary};
     }
-    
+
     img {
       height: 22px;
       width: 22px;
