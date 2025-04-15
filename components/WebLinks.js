@@ -384,17 +384,25 @@ const LinkBio = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 620px;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 40px auto; /* Increased bottom margin for more breathing room */
   width: 100%;
+  text-align: center;
+  opacity: 0; /* Start with 0 opacity for fade-in animation */
+  animation: fadeIn 0.8s ease-in-out forwards;
   
-  h1 {
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  h2 {
     font-size: 20px;
     line-height: 1.6;
     font-weight: 500;
     letter-spacing: -0.2px;
     padding: 0;
     color: ${({ theme }) => theme.text.primary};
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 
     @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
       font-size: 17px;
@@ -505,6 +513,7 @@ const LinkSection = styled.div`
     max-width: 800px;
     width: 100%;
   }
+  
   .iconsonly {
     display: flex;
     justify-content: center;
@@ -515,6 +524,7 @@ const LinkSection = styled.div`
       gap: 12px;
     }
   }
+  
   h3 {
     font-size: 13px;
     text-transform: uppercase;
