@@ -101,20 +101,20 @@ const Links = () => {
                 <OvalIcon />
                 <div className={`${avatarShape} avatar-border`}></div>
                 <div className={`${avatarShape} avatar-fill`}></div>
-                <img src={avatarImg} className={avatarShape} alt="Profile Avatar" />
+                <img src={avatarImg} className={avatarShape} alt="Bhaskoro Abdillah Muthohar - Analytics Engineer" loading="lazy" />
               </AvatarWrap>
             </Avatar>
             <Title>
               {/* Using titleimg flag to use image as title or text */}
               {titleImg ? (
-                <img src={titleImage} className="handle" alt={name} />
+                <img src={titleImage} className="handle" alt="Bhaskoro Abdillah Muthohar" />
               ) : (
-                <h1>{name}</h1>
+                <h1>Bhaskoro Abdillah Muthohar</h1>
               )}
               {/* if your remove username from data it will not appear */}
               {username ? (
                 <h3>
-                  <a href={`${url}`}>{username}</a>
+                  <a href={`${url}`} title="Bhaskoro Muthohar's Website">{username}</a>
                 </h3>
               ) : (
                 ""
@@ -124,7 +124,7 @@ const Links = () => {
 
           {/* Bio Section */}
           <LinkBio>
-            {description && <h1>{descriptionText}</h1>}
+            {description && <h2>{descriptionText}</h2>}
             {subdesc && <h4>{subdescText}</h4>}
           </LinkBio>
           {/* End Bio Section */}
@@ -133,7 +133,7 @@ const Links = () => {
           <WebLinkWrap>
             {/* Social Icons */}
             <LinkSection className="social">
-              <h3>Connect</h3>
+              <h3>Connect with Bhaskoro</h3>
               <div className="iconsonly">
                 {social.map((i) => {
                   return (

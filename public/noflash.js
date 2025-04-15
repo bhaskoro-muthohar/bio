@@ -1,6 +1,5 @@
-// Insert this script in your index.html right after the <body> tag.
-// This will help to prevent a flash if dark mode is the default.
-
+// Optimized version for Bhaskoro Muthohar's website
+// Prevents flash on theme toggle and preloads critical resources
 (function () {
   // Change these if you use something different in your hook.
   var storageKey = 'darkMode';
@@ -36,5 +35,24 @@
     // source of truth from document.body
     var isDarkMode = document.body.classList.contains(classNameDark);
     localStorage.setItem(storageKey, JSON.stringify(isDarkMode));
+  }
+  
+  // Preload critical resources
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(function() {
+      var resources = [
+        "/bhaskoro-muthohar-profile.jpeg",
+        "/favicon.ico",
+        "/bg.png"
+      ];
+      
+      resources.forEach(function(url) {
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = url.endsWith('.jpeg') || url.endsWith('.png') ? 'image' : 'fetch';
+        link.href = url;
+        document.head.appendChild(link);
+      });
+    });
   }
 })();

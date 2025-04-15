@@ -7,7 +7,7 @@ export default function Seo({ page }) {
         <>
             <NextSeo
                 title={title}
-                titleTemplate={seoData.openGraph.title}
+                titleTemplate={`%s | ${seoData.openGraph.title}`}
                 defaultTitle={seoData.openGraph.title}
                 description={seoData.openGraph.description}
                 canonical={seoData.openGraph.url}
@@ -25,11 +25,11 @@ export default function Seo({ page }) {
                             alt: `${title}`,
                         },
                     ],
-                    site_name: 'vjy.me',
+                    site_name: 'itsmebhas.net',
                 }}
                 twitter={{
-                    handle: '@realvjy',
-                    site: 'vjy.me',
+                    handle: '@Br__AM',
+                    site: 'itsmebhas.net',
                     cardType: 'summary_large_image',
                 }}
                 additionalMetaTags={[{
@@ -54,6 +54,35 @@ export default function Seo({ page }) {
                     maxImagePreview: 'large',
                     maxVideoPreview: -1,
                 }}
+                additionalLinkTags={[
+                    {
+                        rel: 'canonical',
+                        href: seoData.openGraph.url,
+                    }
+                ]}
+                additionalJsonLd={[
+                    {
+                        '@context': 'https://schema.org',
+                        '@type': 'Person',
+                        name: 'Bhaskoro Abdillah Muthohar',
+                        alternateName: 'Bhaskoro Muthohar',
+                        url: seoData.openGraph.url,
+                        jobTitle: 'Analytics Engineer',
+                        image: seoData.openGraph.images[0].url,
+                        alumniOf: ['Bank Jago', 'GovTech Edu Indonesia'],
+                        knowsAbout: ['Data Engineering', 'Machine Learning', 'MLOps', 'Python', 'SQL', 'BigQuery', 'dbt', 'Airflow', 'Kubernetes', 'CI/CD', 'GCP'],
+                        worksFor: {
+                            '@type': 'Organization',
+                            name: 'StraitsX'
+                        },
+                        sameAs: [
+                            'https://github.com/bhaskoro-muthohar',
+                            'https://www.linkedin.com/in/bhaskoro-muthohar',
+                            'https://twitter.com/Br__AM',
+                            'https://instagram.com/bhaskoro.muthohar'
+                        ]
+                    }
+                ]}
             />
         </>
     );
