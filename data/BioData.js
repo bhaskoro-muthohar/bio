@@ -8,7 +8,7 @@ const bioData = [
     avatar: "/bhaskoro-muthohar-profile.jpeg",
     nftAvatar: true,
     description:
-      "Bhaskoro Muthohar is a Data Engineer at StraitsX, responsible for managing machine learning infrastructure. Formerly with GovTech Edu Indonesia and Bank Jago.",
+      "Bhaskoro Muthohar is a Machine Learning/Data Engineer at StraitsX, responsible for managing machine learning infrastructure. Formerly with GovTech Edu Indonesia and Bank Jago.",
     descShow: true,
     subdesc:
       "Machine Learning Engineering (Model Deployment & MLOps) \nData Engineering (Python, SQL, GCP, Kubernetes, CI/CD) \nAnalytics Engineering (dbt, Airflow, BigQuery)",
