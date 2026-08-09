@@ -32,7 +32,6 @@ export default class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link
                         rel="preconnect"
@@ -43,10 +42,23 @@ export default class MyDocument extends Document {
                         href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap"
                         rel="stylesheet"
                     />
-
                 </Head>
                 <body>
-
+                    <script dangerouslySetInnerHTML={{ __html: `
+(function(){
+  var storageKey='darkMode';
+  var classNameDark='dark-mode';
+  var classNameLight='light-mode';
+  function setClass(d){document.body.classList.add(d?classNameDark:classNameLight);document.body.classList.remove(d?classNameLight:classNameDark)}
+  var preferDarkQuery='(prefers-color-scheme: dark)';
+  var mql=window.matchMedia(preferDarkQuery);
+  var stored=null;
+  try{stored=localStorage.getItem(storageKey)}catch(e){}
+  if(stored!==null){setClass(JSON.parse(stored))}
+  else if(mql.media===preferDarkQuery){setClass(mql.matches);try{localStorage.setItem(storageKey,mql.matches)}catch(e){}}
+  else{setClass(false)}
+})();
+                    `}} />
                     <Main />
                     <NextScript />
                 </body>

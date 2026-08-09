@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react"
-import useDarkMode from "use-dark-mode"
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import Layout from "../components/Layout";
@@ -8,17 +6,11 @@ import { darkTheme, lightTheme } from "../styles/theme.config";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
+import useDarkMode from '../hooks/useDarkMode';
 
 function MyApp({ Component, pageProps }) {
-    const darkMode = useDarkMode(false, { storageKey: null, onChange: null })
-    const [isMounted, setIsMounted] = useState(false)
-
-    // const [theme, setTheme] = useState(lightTheme)
+    const darkMode = useDarkMode(false);
     const theme = darkMode.value ? darkTheme : lightTheme;
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, [])
 
     return (
         <>
@@ -26,7 +18,6 @@ function MyApp({ Component, pageProps }) {
             <ThemeProvider theme={theme}>
                 <Head>
                     <link rel="icon" href="/favicon.ico" />
-
                 </Head>
                 <GlobalStyle />
                 <Layout>
@@ -54,11 +45,10 @@ function MyApp({ Component, pageProps }) {
                             content: 'IE=edge; chrome=1'
                         }]}
                     />
-                    {isMounted && <Component {...pageProps} />}
+                    <Component {...pageProps} />
                 </Layout>
             </ThemeProvider>
         </>
-
     )
 }
 export default MyApp

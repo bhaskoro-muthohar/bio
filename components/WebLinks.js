@@ -2,15 +2,10 @@
 // created by @realvjy
 // date: 29 Jul, 2022
 
-import Image from "next/image";
 import styled from "styled-components";
-import { Button, ButtonLink, Container, StyledLink } from "./ReusableStyles";
-import Link from "next/link";
+import { Container } from "./ReusableStyles";
 import {
-  ChevronRightIcon,
   HexIcon,
-  HomeIcon,
-  TwitterIcon,
   NewUp,
   OvalIcon,
 } from "./icons";
@@ -110,7 +105,7 @@ const Links = () => {
                 <img
                   src={avatarImg}
                   className={avatarShape}
-                  alt="Bhaskoro Abdillah Muthohar - Analytics Engineer"
+                  alt="Bhaskoro Abdillah Muthohar - Machine Learning/Data Engineer"
                   loading="lazy"
                 />
               </AvatarWrap>
@@ -682,17 +677,3 @@ const LinkTitle = styled.div`
   }
 `;
 
-const NewSection = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 16px 20px;
-  img {
-    width: 100%;
-    border: 1px solid ${({ theme }) => theme.bg.secondary};
-    border-radius: 12px;
-    cursor: pointer;
-    &:hover {
-      transform: scale(1.01);
-    }
-  }
-`;

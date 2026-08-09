@@ -1,17 +1,16 @@
 export default {
     openGraph: {
         type: 'website',
-        locale: 'en_IE',
-        title: 'Bhaskoro Abdillah Muthohar | Analytics Engineer & Data Expert',
+        locale: 'en_US',
+        title: 'Bhaskoro Abdillah Muthohar | Machine Learning & Data Engineer',
         url: 'https://www.itsmebhas.net/',
-        description: 'Bhaskoro Muthohar is an Analytics Engineer with expertise in data engineering and machine learning. Currently a Data Engineer at StraitsX, specializing in MLOps and infrastructure.',
-        locale: 'en_EN',
-        keywords: 'Bhaskoro Abdillah Muthohar, Bhaskoro Muthohar, analytics engineer, data engineer, machine learning engineer, mlops, python developer, sql, bigquery, dbt, airflow, business intelligence, data science, kubernetes, CI/CD, GCP, straitsx',
+        description: 'Bhaskoro Muthohar is a Machine Learning/Data Engineer with expertise in MLOps, data engineering, and infrastructure. Currently at StraitsX, specializing in model deployment and data pipelines.',
+        keywords: 'Bhaskoro Abdillah Muthohar, Bhaskoro Muthohar, machine learning engineer, data engineer, mlops, python developer, sql, bigquery, dbt, airflow, business intelligence, data science, kubernetes, CI/CD, GCP, straitsx',
         images: [
             {
-                width: 1200,
-                height: 630,
-                url: `/bhaskoro-muthohar-profile.jpeg`,
+                width: 800,
+                height: 800,
+                url: 'https://www.itsmebhas.net/bhaskoro-muthohar-profile.jpeg',
             },
         ],
         site_name: 'Bhaskoro Muthohar',
@@ -19,6 +18,6 @@ export default {
     twitter: {
         handle: '@Br__AM',
         site: '@Br__AM',
-        cardType: 'summary_large_image',
+        cardType: 'summary',
     },
 };
