@@ -50,12 +50,7 @@ export default function Seo() {
                     maxImagePreview: 'large',
                     maxVideoPreview: -1,
                 }}
-                additionalLinkTags={[
-                    {
-                        rel: 'canonical',
-                        href: seoData.openGraph.url,
-                    }
-                ]}
+                additionalLinkTags={[]}
             />
             <script
                 type="application/ld+json"

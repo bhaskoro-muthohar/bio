@@ -9,7 +9,7 @@ import SEO from '../next-seo.config';
 import useDarkMode from '../hooks/useDarkMode';
 
 function MyApp({ Component, pageProps }) {
-    const darkMode = useDarkMode(false);
+    const darkMode = useDarkMode();
     const theme = darkMode.value ? darkTheme : lightTheme;
 
     return (
@@ -22,23 +22,10 @@ function MyApp({ Component, pageProps }) {
                 <GlobalStyle />
                 <Layout>
                     <DefaultSeo
-                        canonical={SEO.openGraph.url}
                         {...SEO}
                         additionalMetaTags={[{
                             name: 'keywords',
                             content: SEO.openGraph.keywords,
-                        },
-                        {
-                            name: 'twitter:image',
-                            content: SEO.openGraph.images[0].url
-                        },
-                        {
-                            name: 'twitter:title',
-                            content: SEO.openGraph.title,
-                        },
-                        {
-                            name: 'twitter:description',
-                            content: SEO.openGraph.description,
                         },
                         {
                             httpEquiv: 'x-ua-compatible',

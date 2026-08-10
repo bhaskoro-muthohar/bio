@@ -39,23 +39,10 @@ const Links = () => {
     ? subdesc
     : `Write your own if you want or just remove me/leave blank`;
 
-  const newProduct = bioData[0].newProduct; // checking for newProduct flag true false
-  const newProductUrl = bioData[0].newProductUrl; // get product url if available
-
   // Collect all links filter by type - social, project, nft and other etc
   // get data for social section
   const social = allLinks.filter((el) => {
     return el.type === "social" && el.on;
-  });
-
-  // Get data for install section
-  const install = allLinks.filter((el) => {
-    return el.type === "install" && el.on;
-  });
-
-  // Get data for nfts
-  const nfts = allLinks.filter((el) => {
-    return el.type === "nft" && el.on;
   });
 
   // Get data for all project types and group by category
@@ -74,11 +61,6 @@ const Links = () => {
       acc[project.type].push(project);
       return acc;
     }, {});
-
-  // Get individual project arrays for backward compatibility
-  const mlEngProjects = projectCategories["ML Engineering"] || [];
-  const dataEngProjects = projectCategories["Data Analytics"] || [];
-  const webAppProjects = projectCategories["Web Applications"] || [];
 
   // Get data for Articles section
   const articles = allLinks.filter((el) => {
