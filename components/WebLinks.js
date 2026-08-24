@@ -77,8 +77,9 @@ export default function ProcessSheet() {
           <span className="tag">CONTINUOUS · 6 YR</span>
         </SecHead>
         <div>
-          <FlowLine>
-            {units.map((unit) => (
+          <ProcessViewport aria-label="Horizontal career process">
+            <FlowLine>
+              {units.map((unit) => (
               <Unit
                 key={unit.tag}
                 className={`${unit.live ? "live" : ""} ${
@@ -94,8 +95,9 @@ export default function ProcessSheet() {
                 <span className="dur">{unit.meta}</span>
               </Unit>
             ))}
-          </FlowLine>
-          <Stream aria-hidden="true" />
+            </FlowLine>
+            <Stream aria-hidden="true" />
+          </ProcessViewport>
           <StreamNote>
             <span className="lbl">Prior operators — {priorOperators}</span>
             <span className="lbl">Unit reversal: none</span>
@@ -130,7 +132,11 @@ export default function ProcessSheet() {
           <h2>Stream Table</h2>
           <span className="tag">{streams.length} STREAMS · NEWEST FIRST</span>
         </SecHead>
-        <TableWrap>
+        <TableWrap
+          role="region"
+          aria-label="Streams, services, stacks, and years"
+          tabIndex={0}
+        >
           <table>
             <thead>
               <tr>
@@ -193,6 +199,7 @@ export default function ProcessSheet() {
             </tbody>
           </table>
         </TableWrap>
+        <TableHint>Scroll horizontally to view all stream columns.</TableHint>
         <span className="lbl">
           S-01 and S-02 are internal systems at StraitsX — no public link.
         </span>
@@ -205,41 +212,33 @@ export default function ProcessSheet() {
         </SecHead>
         <Ops>
           {operations.map((op) => (
-            <a
-              className="op"
-              key={op.tag}
-              href={op.url}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <article className="op" key={op.tag}>
               <span className="op-tag">
                 {op.tag} <span className="dot" aria-hidden="true" /> ONLINE
               </span>
-              <span className="op-host">{op.host}</span>
+              <a
+                className="op-host"
+                href={op.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {op.host}
+              </a>
               <span className="op-desc">{op.desc}</span>
-              {/* Upstream credit can't nest inside this anchor, so it renders
-                  as a sibling list below the cards. */}
               <span className="op-stack">{op.stack}</span>
-            </a>
-          ))}
-        </Ops>
-        {operations.some((op) => op.credit) && (
-          <OpsCredits>
-            {operations
-              .filter((op) => op.credit)
-              .map((op) => (
+              {op.credit && (
                 <a
-                  key={op.tag}
-                  className="lbl"
+                  className="op-credit lbl"
                   href={op.credit.url}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {op.tag} — {op.credit.label}
+                  {op.credit.label}
                 </a>
-              ))}
-          </OpsCredits>
-        )}
+              )}
+            </article>
+          ))}
+        </Ops>
         <OpsNote className="lbl">{opsNote}</OpsNote>
       </Section>
 
@@ -502,14 +501,21 @@ const SecHead = styled.div`
 
 /* ------------------------------------------------------------ process line */
 
+const ProcessViewport = styled.div`
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding-bottom: 0.3rem;
+
+  &:focus-visible {
+    outline-offset: 5px;
+  }
+`;
+
 const FlowLine = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(154px, 1fr));
   align-items: stretch;
-
-  @media screen and (max-width: 860px) {
-    grid-template-columns: 1fr;
-  }
+  min-width: 770px;
 `;
 
 const Unit = styled.div`
@@ -575,26 +581,10 @@ const Unit = styled.div`
   &.live .tagno {
     color: var(--signal);
   }
-
-  @media screen and (max-width: 860px) {
-    & + & {
-      border-left: 1px solid var(--rule);
-      border-top: 0;
-    }
-    & + &::before {
-      left: 50%;
-      top: -1px;
-      width: 34px;
-      height: 1px;
-      transform: translateX(-50%);
-    }
-    .dur {
-      margin-top: 0;
-    }
-  }
 `;
 
 const Stream = styled.div`
+  min-width: 770px;
   height: 3px;
   margin-top: -1px;
   background-image: repeating-linear-gradient(
@@ -608,26 +598,6 @@ const Stream = styled.div`
   @keyframes drift {
     to {
       background-position: 22px 0;
-    }
-  }
-
-  @media screen and (max-width: 860px) {
-    height: auto;
-    width: 3px;
-    min-height: 34px;
-    margin: 0 auto;
-    background-image: repeating-linear-gradient(
-      180deg,
-      var(--flow) 0 10px,
-      transparent 10px 22px
-    );
-    background-size: 100% 22px;
-    animation-name: drift-y;
-
-    @keyframes drift-y {
-      to {
-        background-position: 0 22px;
-      }
     }
   }
 `;
@@ -839,6 +809,16 @@ const TableWrap = styled.div`
     font-weight: 500;
     white-space: nowrap;
   }
+
+`;
+
+const TableHint = styled.span`
+  display: none;
+
+  @media screen and (max-width: 760px) {
+    display: block;
+    padding: 0.55rem 1rem 0;
+  }
 `;
 
 /* ----------------------------------------------------------- in operation */
@@ -863,7 +843,7 @@ const Ops = styled.div`
     border-right: 0;
   }
   .op:hover,
-  .op:focus-visible {
+  .op:focus-within {
     background: var(--signal-bg);
   }
 
@@ -899,7 +879,7 @@ const Ops = styled.div`
     text-underline-offset: 4px;
   }
   .op:hover .op-host,
-  .op:focus-visible .op-host {
+  .op:focus-within .op-host {
     text-decoration-color: var(--signal);
   }
 
@@ -912,6 +892,21 @@ const Ops = styled.div`
     color: var(--ink-dim);
     margin-top: auto;
     padding-top: 0.35rem;
+  }
+
+  .op-credit {
+    align-self: flex-start;
+    color: var(--ink-dim);
+    text-decoration: underline;
+    text-decoration-color: var(--flow);
+    text-underline-offset: 4px;
+    line-height: 1.5;
+    transition: color 120ms ease, text-decoration-color 120ms ease;
+  }
+  .op-credit:hover,
+  .op-credit:focus-visible {
+    color: var(--signal);
+    text-decoration-color: var(--signal);
   }
 
   @media screen and (max-width: 560px) {
@@ -929,24 +924,6 @@ const OpsNote = styled.p`
   max-width: 76ch;
   letter-spacing: 0.06em;
   line-height: 1.75;
-`;
-
-const OpsCredits = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-
-  a {
-    text-decoration: underline;
-    text-decoration-color: var(--flow);
-    text-underline-offset: 4px;
-    letter-spacing: 0.06em;
-    align-self: start;
-    transition: color 120ms ease;
-  }
-  a:hover {
-    color: var(--signal);
-  }
 `;
 
 /* ------------------------------------------------------------ connections */
