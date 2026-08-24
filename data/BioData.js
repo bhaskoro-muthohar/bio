@@ -41,7 +41,7 @@ const bioData = {
 
   notes: [
     "I started in chemical engineering and taught myself out of it. The diagram didn't change much — feedstock, unit operations, a product stream, and instrumentation on every stage. Only the units did.",
-    "Today that means machine learning and data infrastructure in payments. Most of what I do is getting models into production and keeping them there, and building the pipelines and platform they run on.",
+    "Today that means machine learning and data engineering in financial infrastructure — payment rails, cards, and the reconciliation underneath. Most of what I do is getting models into production and keeping them there, and building the pipelines and platform they run on.",
     "I build in phases and I measure what I build.",
   ],
 

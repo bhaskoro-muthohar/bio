@@ -1,6 +1,8 @@
-// Stream table. Rows without a `url` are internal systems with no public link;
-// they render as plain text rather than a link. `hi` marks the one phrase in a
-// row that carries an accent — keep these rare, they stop working if overused.
+// Stream table, ordered newest first — the YR column makes the sort visible.
+// Rows without a `url` are internal systems with no public link; they render as
+// plain text rather than a link. `hi` marks the one phrase in a row that carries
+// an accent — keep these rare, they stop working if overused. `alt` is a second
+// link for work published in more than one place.
 export const streams = [
   {
     tag: "S-01",
@@ -22,51 +24,6 @@ export const streams = [
   },
   {
     tag: "S-03",
-    name: "A/B Testing on Government Digital Products",
-    url: "https://journal.unesa.ac.id/index.php/jpsi/article/view/20964",
-    hi: "Peer-reviewed, second of four authors.",
-    desc: "Randomised trials on a national teacher-training platform. Submission rate up 590% in two months.",
-    stack: "JPSI · Vol 7(2)",
-    year: "2023",
-  },
-  {
-    tag: "S-04",
-    name: "Kalender Padi Nusantara",
-    url: "https://github.com/bhaskoro-muthohar/KaPaN",
-    hi: "UN Datathon 2023 — Best Team in Asia.",
-    desc: "Rice planting calendar built from open agricultural data.",
-    stack: "Python · geospatial",
-    year: "2023",
-  },
-  {
-    tag: "S-05",
-    name: "Experimentation Culture",
-    url: "https://medium.com/inadigital-edu/experimentation-culture-at-govtech-edu-how-we-utilize-a-b-testing-method-to-build-data-driven-a9a00c14c1a4",
-    hi: null,
-    desc: "Practitioner write-up of the experimentation programme behind the paper above.",
-    stack: "Writing · Medium",
-    year: "2023",
-  },
-  {
-    tag: "S-06",
-    name: "CoMaGraph",
-    url: "https://github.com/bhaskoro-muthohar/CoMaGraph",
-    hi: null,
-    desc: "Context management for conversational systems — graph store plus embeddings.",
-    stack: "Neo4j · embeddings",
-    year: "2024",
-  },
-  {
-    tag: "S-07",
-    name: "Credit Scoring Pipeline",
-    url: "https://github.com/bhaskoro-muthohar/Credit-Scoring-Deployment",
-    hi: null,
-    desc: "Training through serving as one deployable unit. Ensemble model behind an API.",
-    stack: "FastAPI · sklearn",
-    year: "2024",
-  },
-  {
-    tag: "S-08",
     name: "RealEstimate",
     url: "https://github.com/bhaskoro-muthohar/RealEstimate",
     hi: null,
@@ -75,7 +32,25 @@ export const streams = [
     year: "2025",
   },
   {
-    tag: "S-09",
+    tag: "S-04",
+    name: "CoMaGraph",
+    url: "https://github.com/bhaskoro-muthohar/CoMaGraph",
+    hi: null,
+    desc: "Context management for conversational systems — graph store plus embeddings.",
+    stack: "Neo4j · embeddings",
+    year: "2024",
+  },
+  {
+    tag: "S-05",
+    name: "Credit Scoring Pipeline",
+    url: "https://github.com/bhaskoro-muthohar/Credit-Scoring-Deployment",
+    hi: null,
+    desc: "Training through serving as one deployable unit. Ensemble model behind an API.",
+    stack: "FastAPI · sklearn",
+    year: "2024",
+  },
+  {
+    tag: "S-06",
     name: "Auto Paired T-test",
     url: "https://github.com/bhaskoro-muthohar/auto-paired-ttest",
     hi: null,
@@ -84,7 +59,29 @@ export const streams = [
     year: "2024",
   },
   {
-    tag: "S-10",
+    tag: "S-07",
+    name: "A/B Testing on Government Digital Products",
+    url: "https://journal.unesa.ac.id/index.php/jpsi/article/view/20964",
+    hi: "Peer-reviewed, second of four authors.",
+    desc: "Randomised trials on a national teacher-training platform. Submission rate up 590% in two months.",
+    alt: {
+      label: "Practitioner write-up",
+      url: "https://medium.com/inadigital-edu/experimentation-culture-at-govtech-edu-how-we-utilize-a-b-testing-method-to-build-data-driven-a9a00c14c1a4",
+    },
+    stack: "JPSI · Vol 7(2)",
+    year: "2023",
+  },
+  {
+    tag: "S-08",
+    name: "Kalender Padi Nusantara",
+    url: "https://github.com/bhaskoro-muthohar/KaPaN",
+    hi: "UN Datathon 2023 — Best Team in Asia.",
+    desc: "Rice planting calendar built from open agricultural data.",
+    stack: "Python · geospatial",
+    year: "2023",
+  },
+  {
+    tag: "S-09",
     name: "Oeroenremboog",
     url: "https://github.com/bhaskoro-muthohar/oeroenremboog",
     hi: null,
@@ -95,6 +92,7 @@ export const streams = [
 ];
 
 // Services actually online, as opposed to source in the table above.
+// `credit` marks software someone else wrote that is merely hosted here.
 export const operations = [
   {
     tag: "U-A",
@@ -107,13 +105,24 @@ export const operations = [
     tag: "U-B",
     host: "realestimate.itsmebhas.net",
     url: "https://realestimate.itsmebhas.net",
-    desc: "Mortgage and property cost calculator. Source at S-08.",
+    desc: "Mortgage and property cost calculator. Source at S-03.",
     stack: "FastAPI",
+  },
+  {
+    tag: "U-C",
+    host: "opengym.itsmebhas.net",
+    url: "https://opengym.itsmebhas.net",
+    desc: "Gym tracker I run for myself. Not my code — hosted, not built.",
+    stack: "Docker",
+    credit: {
+      label: "Upstream: DuarteSantos/openGym · AGPL-3.0",
+      url: "https://gitea.com/DuarteSantos/openGym",
+    },
   },
 ];
 
 export const opsNote =
-  "Both run on one Debian VPS behind Caddy — systemd units, release-per-commit with health-checked rollback, deployed by GitHub Actions.";
+  "All three run on one Debian VPS behind Caddy — systemd units and a container stack, release-per-commit with health-checked rollback, deployed by GitHub Actions.";
 
 export const connections = [
   {
