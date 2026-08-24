@@ -128,7 +128,7 @@ export default function ProcessSheet() {
       <Section>
         <SecHead>
           <h2>Stream Table</h2>
-          <span className="tag">{streams.length} STREAMS</span>
+          <span className="tag">{streams.length} STREAMS · NEWEST FIRST</span>
         </SecHead>
         <TableWrap>
           <table>
@@ -170,6 +170,16 @@ export default function ProcessSheet() {
                     <span className="cell s-desc">
                       {s.hi && <span className="hi">{s.hi} </span>}
                       {s.desc}
+                      {s.alt && (
+                        <a
+                          className="altlink"
+                          href={s.alt.url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {s.alt.label}
+                        </a>
+                      )}
                     </span>
                   </td>
                   <td>
@@ -207,10 +217,29 @@ export default function ProcessSheet() {
               </span>
               <span className="op-host">{op.host}</span>
               <span className="op-desc">{op.desc}</span>
+              {/* Upstream credit can't nest inside this anchor, so it renders
+                  as a sibling list below the cards. */}
               <span className="op-stack">{op.stack}</span>
             </a>
           ))}
         </Ops>
+        {operations.some((op) => op.credit) && (
+          <OpsCredits>
+            {operations
+              .filter((op) => op.credit)
+              .map((op) => (
+                <a
+                  key={op.tag}
+                  className="lbl"
+                  href={op.credit.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {op.tag} — {op.credit.label}
+                </a>
+              ))}
+          </OpsCredits>
+        )}
         <OpsNote className="lbl">{opsNote}</OpsNote>
       </Section>
 
@@ -774,6 +803,33 @@ const TableWrap = styled.div`
     color: var(--signal);
     font-weight: 600;
   }
+
+  /* second publication of the same work — subordinate to the row's main link */
+  .altlink {
+    display: block;
+    margin-top: 0.4rem;
+    width: fit-content;
+    font-size: var(--step--1);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    text-decoration: underline;
+    text-decoration-color: var(--flow);
+    text-underline-offset: 4px;
+    padding: 0.3rem 0;
+    transition: color 120ms ease;
+  }
+  .altlink::after {
+    content: "\\2197";
+    margin-left: 0.4em;
+    color: var(--flow);
+  }
+  .altlink:hover {
+    color: var(--signal);
+  }
+  .altlink:hover::after {
+    color: var(--signal);
+  }
   .s-stack {
     color: var(--ink-dim);
     font-size: var(--step--1);
@@ -873,6 +929,24 @@ const OpsNote = styled.p`
   max-width: 76ch;
   letter-spacing: 0.06em;
   line-height: 1.75;
+`;
+
+const OpsCredits = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  a {
+    text-decoration: underline;
+    text-decoration-color: var(--flow);
+    text-underline-offset: 4px;
+    letter-spacing: 0.06em;
+    align-self: start;
+    transition: color 120ms ease;
+  }
+  a:hover {
+    color: var(--signal);
+  }
 `;
 
 /* ------------------------------------------------------------ connections */
