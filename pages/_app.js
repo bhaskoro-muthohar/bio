@@ -6,13 +6,10 @@ import theme from "../styles/theme.config";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 import { DefaultSeo } from "next-seo";
 import SEO from "../next-seo.config";
-import useDarkMode from "../hooks/useDarkMode";
 
 function MyApp({ Component, pageProps }) {
-    // Owns the body class only. Colours resolve from CSS custom properties in
-    // GlobalStyle, so the theme never round-trips through a React render.
-    useDarkMode();
-
+    // The theme control lives in the sheet's title block and owns the body
+    // class from there; colours resolve from CSS custom properties.
     return (
         <>
             <GoogleAnalytics />

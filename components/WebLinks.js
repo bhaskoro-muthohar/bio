@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import useDarkMode from "../hooks/useDarkMode";
 import bioData from "../data/BioData";
 import {
   streams,
@@ -6,6 +7,12 @@ import {
   opsNote,
   connections,
 } from "../data/LinksData";
+
+const THEME_MODES = [
+  ["system", "Sys"],
+  ["light", "Light"],
+  ["dark", "Dark"],
+];
 
 const lastWord = (s) => s.split(" ").slice(-1)[0];
 const leadWords = (s) => {
@@ -16,6 +23,7 @@ const leadWords = (s) => {
 export default function ProcessSheet() {
   const { name, role, avatar, titleBlock, units, priorOperators, notes, readout, footerText } =
     bioData;
+  const { choice, select } = useDarkMode();
 
   return (
     <Sheet>
@@ -37,11 +45,29 @@ export default function ProcessSheet() {
         </TbHead>
         <TbMeta>
           {titleBlock.map((field) => (
-            <div key={field.label}>
+            <dl key={field.label}>
               <dt>{field.label}</dt>
               <dd>{field.value}</dd>
-            </div>
+            </dl>
           ))}
+          <div className="display-cell">
+            <span className="field-label" id="display-label">
+              Display
+            </span>
+            <div className="seg" role="group" aria-labelledby="display-label">
+              {THEME_MODES.map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  className={choice === value ? "on" : undefined}
+                  aria-pressed={choice === value}
+                  onClick={() => select(value)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
         </TbMeta>
       </TitleBlock>
 
@@ -205,7 +231,14 @@ export default function ProcessSheet() {
 
       <Rev>
         <span className="lbl">Rev 2026 · {footerText}</span>
-        <span className="lbl">Drawn and maintained by the operator</span>
+        <a
+          className="lbl"
+          href="https://github.com/bhaskoro-muthohar/bio"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Sheet source on GitHub
+        </a>
       </Rev>
     </Sheet>
   );
@@ -320,11 +353,12 @@ const TbStamp = styled.figure`
   }
 `;
 
-const TbMeta = styled.dl`
+const TbMeta = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
 
-  div {
+  > dl,
+  > .display-cell {
     padding: 0.75rem clamp(0.7rem, 0.5rem + 0.8vw, 1.2rem) 0.85rem;
     border-right: 1px solid var(--rule-soft);
     display: flex;
@@ -332,11 +366,12 @@ const TbMeta = styled.dl`
     gap: 0.28rem;
     min-width: 0;
   }
-  div:last-child {
+  > *:last-child {
     border-right: 0;
   }
 
-  dt {
+  dt,
+  .field-label {
     font-size: var(--step--1);
     font-weight: 600;
     letter-spacing: 0.16em;
@@ -350,13 +385,54 @@ const TbMeta = styled.dl`
     overflow-wrap: anywhere;
   }
 
-  @media screen and (max-width: 720px) {
+  /* Instrument-style selector: three discrete positions, current one lit. */
+  .seg {
+    display: flex;
+    margin-top: 0.1rem;
+  }
+
+  .seg button {
+    font-family: var(--f-mono);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    background: transparent;
+    border: 1px solid var(--rule);
+    padding: 0.3rem 0.42rem;
+    margin-left: -1px;
+    cursor: pointer;
+    transition: color 120ms ease, background-color 120ms ease,
+      border-color 120ms ease;
+    min-height: 30px;
+    flex: 1;
+  }
+  .seg button:first-child {
+    margin-left: 0;
+  }
+  .seg button:hover {
+    color: var(--ink);
+  }
+  .seg button.on {
+    color: var(--signal);
+    background: var(--signal-bg);
+    border-color: var(--signal);
+    position: relative;
+    z-index: 1;
+  }
+
+  @media screen and (max-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
-    div:nth-child(2) {
+    > * {
+      border-bottom: 1px solid var(--rule-soft);
+    }
+    > *:nth-child(2n) {
       border-right: 0;
     }
-    div:nth-child(-n + 2) {
-      border-bottom: 1px solid var(--rule-soft);
+    > *:last-child {
+      border-bottom: 0;
+      grid-column: 1 / -1;
     }
   }
 `;
@@ -843,4 +919,14 @@ const Rev = styled.footer`
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
+
+  a {
+    text-decoration: underline;
+    text-decoration-color: var(--flow);
+    text-underline-offset: 4px;
+    transition: color 120ms ease;
+  }
+  a:hover {
+    color: var(--signal);
+  }
 `;

@@ -45,19 +45,23 @@ export default class MyDocument extends Document {
                     />
                 </Head>
                 <body>
+                    {/* Paints the theme before first paint. Reads only — an
+                        absent preference means "follow the OS", so persisting
+                        here would freeze the first OS value forever. */}
                     <script dangerouslySetInnerHTML={{ __html: `
 (function(){
-  var storageKey='darkMode';
-  var classNameDark='dark-mode';
-  var classNameLight='light-mode';
-  function setClass(d){document.body.classList.add(d?classNameDark:classNameLight);document.body.classList.remove(d?classNameLight:classNameDark)}
-  var preferDarkQuery='(prefers-color-scheme: dark)';
-  var mql=window.matchMedia(preferDarkQuery);
-  var stored=null;
-  try{stored=localStorage.getItem(storageKey)}catch(e){}
-  if(stored!==null){setClass(JSON.parse(stored))}
-  else if(mql.media===preferDarkQuery){setClass(mql.matches);try{localStorage.setItem(storageKey,mql.matches)}catch(e){}}
-  else{setClass(false)}
+  var c=document.body.classList,t='system';
+  try{
+    var s=localStorage.getItem('theme');
+    if(s==='light'||s==='dark'){t=s}
+    else{var l=localStorage.getItem('darkMode');if(l==='true'){t='dark'}else if(l==='false'){t='light'}}
+  }catch(e){}
+  var d=t==='dark';
+  if(t==='system'){
+    try{d=window.matchMedia('(prefers-color-scheme: dark)').matches}catch(e){d=false}
+  }
+  c.add(d?'dark-mode':'light-mode');
+  c.remove(d?'light-mode':'dark-mode');
 })();
                     `}} />
                     <Main />
