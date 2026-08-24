@@ -1,661 +1,846 @@
-// Weblinks Page Sections
-// created by @realvjy
-// date: 29 Jul, 2022
-
 import styled from "styled-components";
-import { Container } from "./ReusableStyles";
-import {
-  HexIcon,
-  NewUp,
-  OvalIcon,
-} from "./icons";
-import allLinks from "../data/LinksData";
 import bioData from "../data/BioData";
+import {
+  streams,
+  operations,
+  opsNote,
+  connections,
+} from "../data/LinksData";
 
-const Links = () => {
-  // all user info from bioData
-  const name = bioData[0].name;
-  const url = bioData[0].url;
-  const username = bioData[0].username;
-  const titleImg = bioData[0].titleImg;
-  const avatarImg = bioData[0].avatar;
-  const description = bioData[0].description;
-  const descShow = bioData[0].descShow;
-  const subdesc = bioData[0].subdesc;
-  const subdescShow = bioData[0].subdescShow;
-  const footerText = bioData[0].footerText;
-  const author = bioData[0].author;
-  const authorURL = bioData[0].authorURL;
-  const titleImage = "/title.svg";
-
-  // Check what class to use oval or hex for avatar
-  const avatarShape = bioData[0].nftAvatar ? `nft-clipped` : `oval-clipped`;
-
-  // Description and subdescription goes here
-  const descriptionText = descShow
-    ? description
-    : `Write your own fall back text if description not in BioData.js or remove me/leave blank`;
-  const subdescText = subdescShow
-    ? subdesc
-    : `Write your own if you want or just remove me/leave blank`;
-
-  // Collect all links filter by type - social, project, nft and other etc
-  // get data for social section
-  const social = allLinks.filter((el) => {
-    return el.type === "social" && el.on;
-  });
-
-  // Get data for all project types and group by category
-  const projectCategories = allLinks
-    .filter((el) => {
-      return (
-        ["ML Engineering", "Data Analytics", "Web Applications"].includes(
-          el.type
-        ) && el.on
-      );
-    })
-    .reduce((acc, project) => {
-      if (!acc[project.type]) {
-        acc[project.type] = [];
-      }
-      acc[project.type].push(project);
-      return acc;
-    }, {});
-
-  // Get data for Articles section
-  const articles = allLinks.filter((el) => {
-    return el.type === "Articles" && el.on;
-  });
-
-  // Get data for other section
-  const others = allLinks.filter((el) => {
-    return el.type === "other" && el.on;
-  });
-
-  return (
-    <LinkWrapper>
-      <LinkContainer>
-        <TopPart>
-          <LinkHeader>
-            <Avatar>
-              <AvatarWrap>
-                {/* Avatar svg  hex or oval if nftAvatar=true will convert to hex */}
-                <HexIcon />
-                <OvalIcon />
-                <div className={`${avatarShape} avatar-border`}></div>
-                <div className={`${avatarShape} avatar-fill`}></div>
-                <img
-                  src={avatarImg}
-                  className={avatarShape}
-                  alt="Bhaskoro Abdillah Muthohar - Machine Learning/Data Engineer"
-                  loading="lazy"
-                />
-              </AvatarWrap>
-            </Avatar>
-            <Title>
-              {/* Using titleimg flag to use image as title or text */}
-              {titleImg ? (
-                <img
-                  src={titleImage}
-                  className="handle"
-                  alt="Bhaskoro Abdillah Muthohar"
-                />
-              ) : (
-                <h1>Bhaskoro Abdillah Muthohar</h1>
-              )}
-              {/* if your remove username from data it will not appear */}
-              {username ? (
-                <h3>
-                  <a href={`${url}`} title="Bhaskoro Muthohar's Website">
-                    {username}
-                  </a>
-                </h3>
-              ) : (
-                ""
-              )}
-            </Title>
-          </LinkHeader>
-
-          {/* Bio Section */}
-          <LinkBio>
-            {description && <h2>{descriptionText}</h2>}
-            {subdesc && <h4>{subdescText}</h4>}
-          </LinkBio>
-          {/* End Bio Section */}
-
-          {/* Weblinks started */}
-          <WebLinkWrap>
-            {/* Social Icons */}
-            <LinkSection className="social">
-              <h3>Connect with Bhas</h3>
-              <div className="iconsonly">
-                {social.map((i) => {
-                  return (
-                    <a
-                      href={i.url}
-                      key={i.title}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={i.title}
-                    >
-                      <LinkBox className="socialIcon" title={i.title}>
-                        <img
-                          src={i.icon}
-                          style={{ filter: "var(--img)" }}
-                          alt={i.title}
-                        />
-                      </LinkBox>
-                    </a>
-                  );
-                })}
-              </div>
-            </LinkSection>
-            {/* End Social Icons */}
-
-            {/* Projects Sections */}
-            <div className="projects-container">
-              {Object.entries(projectCategories).map(
-                ([category, projects]) =>
-                  projects.length > 0 && (
-                    <LinkSection key={category} className="project-section">
-                      <h3>{category}</h3>
-                      {projects.map((project) => (
-                        <a
-                          href={project.url}
-                          key={project.title}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="project-link"
-                        >
-                          <LinkBox>
-                            <LinkTitle>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                }}
-                              >
-                                <img src={project.icon} alt={project.title} />{" "}
-                                {project.title}
-                              </div>
-                              {project.subdesc && (
-                                <div className="subdesc">{project.subdesc}</div>
-                              )}
-                            </LinkTitle>
-                            <NewUp />
-                          </LinkBox>
-                        </a>
-                      ))}
-                    </LinkSection>
-                  )
-              )}
-            </div>
-            {/* End Projects Sections */}
-
-            {/* Articles Section */}
-            {articles.length > 0 && (
-              <LinkSection className="project-section">
-                <h3>Articles</h3>
-                {articles.map((i) => (
-                  <a
-                    href={i.url}
-                    key={i.title}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="project-link"
-                  >
-                    <LinkBox>
-                      <LinkTitle>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <img src={i.icon} alt={i.title} /> {i.title}
-                        </div>
-                        {i.subdesc && (
-                          <div className="subdesc">{i.subdesc}</div>
-                        )}
-                      </LinkTitle>
-                      <NewUp />
-                    </LinkBox>
-                  </a>
-                ))}
-              </LinkSection>
-            )}
-            {/* End Articles Section */}
-
-            {/* Other Section */}
-            {others.length > 0 && (
-              <LinkSection className="project-section">
-                <h3>{others[0].type}</h3>
-                {others.map((i) => (
-                  <a
-                    href={i.url}
-                    key={i.title}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="project-link"
-                  >
-                    <LinkBox>
-                      <LinkTitle>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <img src={i.icon} alt={i.title} /> {i.title}
-                        </div>
-                        {i.subdesc && (
-                          <div className="subdesc">{i.subdesc}</div>
-                        )}
-                      </LinkTitle>
-                      <NewUp />
-                    </LinkBox>
-                  </a>
-                ))}
-              </LinkSection>
-            )}
-            {/* End Other Section */}
-          </WebLinkWrap>
-          {/* End Weblinks */}
-        </TopPart>
-        <BottomPart>
-          <LinkFoot>
-            {footerText && (
-              <h4>
-                {footerText} {author && <a href={authorURL}>{author}</a>}
-              </h4>
-            )}
-          </LinkFoot>
-        </BottomPart>
-      </LinkContainer>
-    </LinkWrapper>
-  );
+const lastWord = (s) => s.split(" ").slice(-1)[0];
+const leadWords = (s) => {
+  const words = s.split(" ").slice(0, -1);
+  return words.length ? `${words.join(" ")} ` : "";
 };
 
-export default Links;
+export default function ProcessSheet() {
+  const { name, role, avatar, titleBlock, units, priorOperators, notes, readout, footerText } =
+    bioData;
 
-const LinkWrapper = styled(Container)``;
+  return (
+    <Sheet>
+      <TitleBlock>
+        <TbHead>
+          <TbName>
+            <h1>
+              Bhaskoro
+              <br />
+              Muthohar
+            </h1>
+            <p className="role">{role}</p>
+          </TbName>
+          <TbStamp>
+            {/* Above the fold: eager, with intrinsic size to reserve layout */}
+            <img src={avatar} alt={name} width="440" height="440" />
+            <figcaption>Drawn by</figcaption>
+          </TbStamp>
+        </TbHead>
+        <TbMeta>
+          {titleBlock.map((field) => (
+            <div key={field.label}>
+              <dt>{field.label}</dt>
+              <dd>{field.value}</dd>
+            </div>
+          ))}
+        </TbMeta>
+      </TitleBlock>
 
-const LinkContainer = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  padding: 40px;
-  max-width: 900px;
+      <Section>
+        <SecHead>
+          <h2>Process Line</h2>
+          <span className="tag">CONTINUOUS · 6 YR</span>
+        </SecHead>
+        <div>
+          <FlowLine>
+            {units.map((unit) => (
+              <Unit
+                key={unit.tag}
+                className={`${unit.live ? "live" : ""} ${
+                  unit.terminal ? "terminal" : ""
+                }`}
+              >
+                <span className="tagno">{unit.tag}</span>
+                <h3>
+                  {unit.title[0]}
+                  <br />
+                  {unit.title[1]}
+                </h3>
+                <span className="dur">{unit.meta}</span>
+              </Unit>
+            ))}
+          </FlowLine>
+          <Stream aria-hidden="true" />
+          <StreamNote>
+            <span className="lbl">Prior operators — {priorOperators}</span>
+            <span className="lbl">Unit reversal: none</span>
+          </StreamNote>
+        </div>
+      </Section>
+
+      <Section>
+        <SecHead>
+          <h2>Notes</h2>
+          <span className="tag">REF. 01</span>
+        </SecHead>
+        <Notes>
+          <div>
+            {notes.map((para) => (
+              <p key={para.slice(0, 24)}>{para}</p>
+            ))}
+          </div>
+          <Readout>
+            {readout.map((row) => (
+              <div className="r-row" key={row.label}>
+                <span className="lbl">{row.label}</span>
+                <span className="r-val">{row.value}</span>
+              </div>
+            ))}
+          </Readout>
+        </Notes>
+      </Section>
+
+      <Section>
+        <SecHead>
+          <h2>Stream Table</h2>
+          <span className="tag">{streams.length} STREAMS</span>
+        </SecHead>
+        <TableWrap>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Tag</th>
+                <th scope="col">Stream</th>
+                <th scope="col">Service</th>
+                <th scope="col">Stack</th>
+                <th scope="col">Yr</th>
+              </tr>
+            </thead>
+            <tbody>
+              {streams.map((s) => (
+                <tr key={s.tag}>
+                  <td>
+                    <span className="cell s-tag">{s.tag}</span>
+                  </td>
+                  <td>
+                    <span className="cell s-name">
+                      {s.url ? (
+                        <a
+                          className="rowlink"
+                          href={s.url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {leadWords(s.name)}
+                          {/* last word and arrow travel together so the
+                              marker can never orphan onto its own line */}
+                          <span className="tail">{lastWord(s.name)}</span>
+                        </a>
+                      ) : (
+                        <span className="internal">{s.name}</span>
+                      )}
+                    </span>
+                  </td>
+                  <td>
+                    <span className="cell s-desc">
+                      {s.hi && <span className="hi">{s.hi} </span>}
+                      {s.desc}
+                    </span>
+                  </td>
+                  <td>
+                    <span className="cell s-stack">{s.stack}</span>
+                  </td>
+                  <td>
+                    <span className="cell s-year">{s.year}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </TableWrap>
+        <span className="lbl">
+          S-01 and S-02 are internal systems at StraitsX — no public link.
+        </span>
+      </Section>
+
+      <Section>
+        <SecHead>
+          <h2>In Operation</h2>
+          <span className="tag">SELF-HOSTED</span>
+        </SecHead>
+        <Ops>
+          {operations.map((op) => (
+            <a
+              className="op"
+              key={op.tag}
+              href={op.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="op-tag">
+                {op.tag} <span className="dot" aria-hidden="true" /> ONLINE
+              </span>
+              <span className="op-host">{op.host}</span>
+              <span className="op-desc">{op.desc}</span>
+              <span className="op-stack">{op.stack}</span>
+            </a>
+          ))}
+        </Ops>
+        <OpsNote className="lbl">{opsNote}</OpsNote>
+      </Section>
+
+      <Section>
+        <SecHead>
+          <h2>Connections</h2>
+          <span className="tag">{connections.length} PORTS</span>
+        </SecHead>
+        <Conn>
+          {connections.map((c) => (
+            <a key={c.label} href={c.url} target="_blank" rel="noreferrer">
+              <span className="lbl">{c.label}</span>
+              <span className="c-handle">{c.handle}</span>
+            </a>
+          ))}
+        </Conn>
+      </Section>
+
+      <Rev>
+        <span className="lbl">Rev 2026 · {footerText}</span>
+        <span className="lbl">Drawn and maintained by the operator</span>
+      </Rev>
+    </Sheet>
+  );
+}
+
+/* ---------------------------------------------------------------- layout */
+
+const Sheet = styled.main`
+  max-width: ${({ theme }) => theme.maxWidth};
   margin: 0 auto;
-  width: 100%;
-
-  @media screen and (max-width: ${({ theme }) => theme.deviceSize.laptop}) {
-    max-width: 800px;
-    padding: 32px;
-  }
-
-  @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-    max-width: 700px;
-    padding: 16px;
-  }
-`;
-
-const LinkHeader = styled.div`
+  padding: var(--gut);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 60px;
-  margin-bottom: 12px;
-  @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-    margin-top: 20px;
-  }
-`;
+  gap: clamp(2.6rem, 1.4rem + 4vw, 5rem);
 
-const Avatar = styled.div`
-  height: 90px;
-  width: 90px;
-  position: relative;
-  margin-bottom: 12px;
-`;
-
-const AvatarWrap = styled.div`
-  height: 100%;
-  width: 100%;
-  filter: drop-shadow(0px 1px 2px var(--avatar-shadow));
-  img {
-    height: calc(100% - 6px);
-    width: calc(100% - 6px);
-  }
-  .avatar-border {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    background: ${({ theme }) => theme.bg.primary};
-  }
-  .avatar-fill {
-    height: calc(100% - 6px);
-    width: calc(100% - 6px);
-    position: absolute;
-    background: ${({ theme }) => theme.bg.primary};
-  }
-`;
-
-const Title = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  h1 {
-    font-size: 38px;
-    font-weight: 700;
-
-    letter-spacing: -2px;
-    background: linear-gradient(
-      90deg,
-      #4ab1f1 5.71%,
-      #566cec 33.77%,
-      #d749af 61.82%,
-      #ff7c51 91.21%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      font-size: 32px;
-    }
-  }
-  h3 {
-    margin-top: 6px;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: -0.7px;
-    color: ${({ theme }) => theme.text.secondary};
-    opacity: 0.5;
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      font-size: 15px;
-      margin-top: 2px;
-    }
-  }
-
-  .name {
-    margin-top: 8px;
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      width: 140px;
-    }
-  }
-  .handle {
-    height: 32px;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      height: 26px;
-    }
-  }
-`;
-
-const LinkBio = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 620px;
-  margin: 0 auto 40px auto; /* Increased bottom margin for more breathing room */
-  width: 100%;
-  text-align: center;
-  opacity: 0; /* Start with 0 opacity for fade-in animation */
-  animation: fadeIn 0.8s ease-in-out forwards;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  h2 {
-    font-size: 20px;
-    line-height: 1.6;
-    font-weight: 500;
-    letter-spacing: -0.2px;
-    padding: 0;
-    color: ${({ theme }) => theme.text.primary};
-    margin-bottom: 18px;
-
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      font-size: 17px;
-      line-height: 1.5;
-    }
-  }
-
-  h4 {
-    font-size: 16px;
-    letter-spacing: 0;
-    margin: 8px 0;
-    color: ${({ theme }) => theme.text.secondary};
-    font-weight: 400;
-    line-height: 1.8;
-    opacity: 0.8;
-    white-space: pre-line;
-    text-align: center;
-
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    a {
-      font-weight: 600;
-      opacity: 0.8;
-      transition: opacity 0.2s ease;
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
-`;
-const TopPart = styled.div``;
-
-const BottomPart = styled.div`
-  margin-bottom: 40px;
-`;
-const LinkFoot = styled.div`
-  h4 {
-    color: ${({ theme }) => theme.text.secondary};
-    line-height: 32px;
-    letter-spacing: -0.2px;
-    font-size: 16px;
-    font-weight: 500;
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      font-size: 12px;
-    }
-    span {
-      font-size: 10px;
-      vertical-align: bottom;
-      line-height: 32px;
-      margin: 0 2px;
-      opacity: 0.6;
-      @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-        font-size: 8px;
-      }
-    }
-  }
-`;
-
-const WebLinkWrap = styled.div`
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-
-  .projects-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-  }
-
-  .project-section {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .project-link {
-    width: 100%;
-    display: block;
-  }
-
-  @media screen and (max-width: ${({ theme }) => theme.deviceSize.laptop}) {
-    max-width: 700px;
-  }
-
-  @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-    padding: 0;
-    max-width: 100%;
-  }
-`;
-
-const LinkSection = styled.div`
-  padding: 12px 0;
-  display: flex;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  &.social {
-    max-width: max-content;
-    padding: 14px 0;
-    margin-bottom: 24px;
-  }
-
-  &.project-section {
-    max-width: 800px;
-    width: 100%;
-  }
-
-  .iconsonly {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    gap: 8px;
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-  }
-
-  h3 {
-    font-size: 13px;
+  .lbl {
+    font-family: var(--f-mono);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 8px;
-    color: ${({ theme }) => theme.text.secondary};
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      font-size: 12px;
-    }
+    color: var(--ink-dim);
   }
 `;
 
-const LinkBox = styled.div`
-  padding: 18px 20px;
-  border-radius: 12px;
-  margin: 8px 0;
-  border: 1px solid ${({ theme }) => theme.bg.secondary};
-  flex-direction: row;
+/* ------------------------------------------------------------ title block */
+
+const TitleBlock = styled.header`
+  border: 1px solid var(--rule);
+  background: var(--surface);
+`;
+
+const TbHead = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  border-bottom: 1px solid var(--rule);
+
+  @media screen and (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const TbName = styled.div`
+  padding: clamp(1rem, 0.5rem + 1.8vw, 2.1rem) clamp(1rem, 0.6rem + 1.6vw, 2rem)
+    clamp(0.7rem, 0.4rem + 1vw, 1.2rem);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -0.5px;
-  position: relative;
-  text-align: left;
-  width: 100%;
-  max-width: 100%;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
 
-  &::before {
-    content: "";
-    border-radius: 12px;
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: var(--step-3);
+    line-height: 0.86;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .role {
+    margin-top: clamp(0.7rem, 0.5rem + 0.6vw, 1.1rem);
+    font-size: var(--step-1);
+  }
+`;
+
+const TbStamp = styled.figure`
+  border-left: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  width: clamp(122px, 9vw + 60px, 188px);
+
+  img {
     display: block;
-    position: absolute;
-    z-index: -1;
-    inset: -2px;
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  &:hover {
-    transition: all 333ms ease 0s;
-    border-color: transparent;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    &::before {
-      opacity: 1;
-      background: ${({ theme }) => theme.bg.hover};
-      transition: all 333ms ease 0s;
-      transform: scale(1);
-    }
-  }
-  .new-up {
-    transform: scale(0.8);
-    opacity: 0.7;
-  }
-
-  &.socialIcon {
-    padding: 14px;
-    border-radius: 50%;
-    border: 1px solid ${({ theme }) => theme.bg.secondary};
-    margin: 0;
-    width: auto;
+    width: 100%;
     height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    aspect-ratio: 1;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.06);
+    border-bottom: 1px solid var(--rule);
+  }
 
-    &:hover {
-      transform: translateY(-3px);
-      background-color: ${({ theme }) => theme.bg.tertiary};
-    }
+  figcaption {
+    padding: 0.55rem 0.7rem 0.6rem;
+    text-align: center;
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  @media screen and (max-width: 560px) {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.85rem;
+    width: 100%;
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+    padding: 0.7rem clamp(1rem, 0.6rem + 1.6vw, 2rem);
 
     img {
-      height: 22px;
-      width: 22px;
+      width: 54px;
+      border-bottom: 0;
+      border: 1px solid var(--rule);
     }
+    figcaption {
+      padding: 0;
+      text-align: left;
+    }
+  }
+`;
 
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      padding: 12px;
-      img {
-        height: 18px;
-        width: 18px;
+const TbMeta = styled.dl`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  div {
+    padding: 0.75rem clamp(0.7rem, 0.5rem + 0.8vw, 1.2rem) 0.85rem;
+    border-right: 1px solid var(--rule-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+    min-width: 0;
+  }
+  div:last-child {
+    border-right: 0;
+  }
+
+  dt {
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  dd {
+    font-size: var(--step-0);
+    font-weight: 500;
+    overflow-wrap: anywhere;
+  }
+
+  @media screen and (max-width: 720px) {
+    grid-template-columns: repeat(2, 1fr);
+    div:nth-child(2) {
+      border-right: 0;
+    }
+    div:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--rule-soft);
+    }
+  }
+`;
+
+/* ---------------------------------------------------------------- section */
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+`;
+
+const SecHead = styled.div`
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.55rem;
+
+  h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: var(--step-2);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .tag {
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--flow);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+`;
+
+/* ------------------------------------------------------------ process line */
+
+const FlowLine = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: stretch;
+
+  @media screen and (max-width: 860px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const Unit = styled.div`
+  position: relative;
+  padding: 1.15rem 1rem 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+
+  & + & {
+    border-left: 0;
+  }
+
+  & + &::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 50%;
+    width: 1px;
+    height: 34px;
+    transform: translateY(-50%);
+    background: var(--flow);
+    z-index: 1;
+  }
+
+  .tagno {
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--flow);
+    text-transform: uppercase;
+  }
+
+  &.terminal .tagno {
+    color: var(--ink-dim);
+  }
+
+  h3 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: var(--step-1);
+    line-height: 1.1;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .dur {
+    font-size: var(--step--1);
+    color: var(--ink-dim);
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  &.live {
+    background: var(--signal-bg);
+    outline: 1px solid var(--signal);
+    outline-offset: -1px;
+    z-index: 2;
+  }
+  &.live .tagno {
+    color: var(--signal);
+  }
+
+  @media screen and (max-width: 860px) {
+    & + & {
+      border-left: 1px solid var(--rule);
+      border-top: 0;
+    }
+    & + &::before {
+      left: 50%;
+      top: -1px;
+      width: 34px;
+      height: 1px;
+      transform: translateX(-50%);
+    }
+    .dur {
+      margin-top: 0;
+    }
+  }
+`;
+
+const Stream = styled.div`
+  height: 3px;
+  margin-top: -1px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--flow) 0 10px,
+    transparent 10px 22px
+  );
+  background-size: 22px 100%;
+  animation: drift 1.4s linear infinite;
+
+  @keyframes drift {
+    to {
+      background-position: 22px 0;
+    }
+  }
+
+  @media screen and (max-width: 860px) {
+    height: auto;
+    width: 3px;
+    min-height: 34px;
+    margin: 0 auto;
+    background-image: repeating-linear-gradient(
+      180deg,
+      var(--flow) 0 10px,
+      transparent 10px 22px
+    );
+    background-size: 100% 22px;
+    animation-name: drift-y;
+
+    @keyframes drift-y {
+      to {
+        background-position: 0 22px;
       }
     }
   }
-  @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-    padding: 16px;
-    margin: 6px 0;
-    font-size: 15px;
+`;
+
+const StreamNote = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.55rem;
+`;
+
+/* ------------------------------------------------------------------ notes */
+
+const Notes = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: clamp(1.4rem, 0.8rem + 2.4vw, 3.2rem);
+
+  p {
+    margin-bottom: 0.95rem;
+    max-width: 62ch;
+    font-size: var(--step-1);
+    line-height: 1.75;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 860px) {
+    grid-template-columns: 1fr;
   }
 `;
 
-const LinkTitle = styled.div`
+const Readout = styled.aside`
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  align-self: start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  font-size: 18px;
-  @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-    font-size: 15px;
+
+  .r-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.85rem 1rem 0.95rem;
+    border-bottom: 1px solid var(--rule-soft);
   }
-  img {
-    height: 20px;
-    margin-right: 10px;
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      height: 18px;
-      margin-right: 8px;
+  .r-row:last-child {
+    border-bottom: 0;
+  }
+
+  .r-val {
+    font-size: var(--step-0);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+`;
+
+/* ----------------------------------------------------------- stream table */
+
+const TableWrap = styled.div`
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 760px;
+  }
+
+  thead th {
+    text-align: left;
+    padding: 0.7rem 1rem 0.75rem;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--rule);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--rule-soft);
+    transition: background-color 120ms ease;
+  }
+  tbody tr:last-child {
+    border-bottom: 0;
+  }
+  tbody tr:hover,
+  tbody tr:focus-within {
+    background: var(--signal-bg);
+  }
+
+  tbody td {
+    padding: 0;
+    vertical-align: top;
+  }
+
+  .cell {
+    padding: 0.95rem 1rem;
+    display: block;
+  }
+
+  .s-tag {
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--flow);
+    white-space: nowrap;
+    transition: color 120ms ease;
+  }
+  tbody tr:hover .s-tag,
+  tbody tr:focus-within .s-tag {
+    color: var(--signal);
+  }
+
+  .s-name {
+    font-family: var(--f-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+  }
+
+  /* Links must read as links without hover — touch devices never hover. */
+  .rowlink {
+    text-decoration: underline;
+    text-decoration-color: var(--flow);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    display: inline-block;
+    padding: 0.55rem 0;
+    margin: -0.55rem 0;
+  }
+  tbody tr:hover .rowlink,
+  tbody tr:focus-within .rowlink {
+    text-decoration-color: var(--signal);
+  }
+
+  .tail {
+    white-space: nowrap;
+  }
+
+  .tail::after {
+    content: "\\2197";
+    display: inline-block;
+    margin-left: 0.45em;
+    opacity: 0.8;
+    color: var(--flow);
+    transition: opacity 140ms ease, transform 140ms ease, color 140ms ease;
+  }
+  tbody tr:hover .tail::after,
+  tbody tr:focus-within .tail::after {
+    opacity: 1;
+    color: var(--signal);
+    transform: translate(2px, -2px);
+  }
+
+  /* Internal systems carry no link; the dashed rule says so without a tooltip. */
+  .internal {
+    border-bottom: 1px dashed var(--rule);
+    padding-bottom: 2px;
+  }
+
+  .s-desc {
+    color: var(--ink-dim);
+    line-height: 1.55;
+  }
+  .s-desc .hi {
+    color: var(--signal);
+    font-weight: 600;
+  }
+  .s-stack {
+    color: var(--ink-dim);
+    font-size: var(--step--1);
+    white-space: nowrap;
+  }
+  .s-year {
+    font-weight: 500;
+    white-space: nowrap;
+  }
+`;
+
+/* ----------------------------------------------------------- in operation */
+
+const Ops = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  border: 1px solid var(--rule);
+
+  .op {
+    padding: 1.05rem clamp(0.85rem, 0.6rem + 0.8vw, 1.3rem) 1.2rem;
+    border-right: 1px solid var(--rule-soft);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    background: var(--surface);
+    transition: background-color 120ms ease;
+    min-width: 0;
+  }
+  .op:last-child {
+    border-right: 0;
+  }
+  .op:hover,
+  .op:focus-visible {
+    background: var(--signal-bg);
+  }
+
+  .op-tag {
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--flow);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--flow);
+    box-shadow: 0 0 0 3px var(--signal-bg);
+    flex: none;
+  }
+
+  .op-host {
+    font-family: var(--f-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+    text-decoration-color: var(--flow);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+  .op:hover .op-host,
+  .op:focus-visible .op-host {
+    text-decoration-color: var(--signal);
+  }
+
+  .op-desc {
+    color: var(--ink-dim);
+    line-height: 1.55;
+  }
+  .op-stack {
+    font-size: var(--step--1);
+    color: var(--ink-dim);
+    margin-top: auto;
+    padding-top: 0.35rem;
+  }
+
+  @media screen and (max-width: 560px) {
+    .op {
+      border-right: 0;
+      border-bottom: 1px solid var(--rule-soft);
     }
-  }
-  .subdesc {
-    font-size: 14px;
-    color: ${({ theme }) => theme.text.secondary};
-    font-weight: normal;
-    margin-top: 4px;
-    @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-      font-size: 13px;
-      line-height: 1.4;
+    .op:last-child {
+      border-bottom: 0;
     }
   }
 `;
 
+const OpsNote = styled.p`
+  max-width: 76ch;
+  letter-spacing: 0.06em;
+  line-height: 1.75;
+`;
+
+/* ------------------------------------------------------------ connections */
+
+const Conn = styled.nav`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  border: 1px solid var(--rule);
+  background: var(--surface);
+
+  a {
+    padding: 1rem clamp(0.8rem, 0.6rem + 0.7vw, 1.2rem) 1.1rem;
+    border-right: 1px solid var(--rule-soft);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    transition: background-color 120ms ease;
+    min-width: 0;
+  }
+  a:last-child {
+    border-right: 0;
+  }
+  a:hover,
+  a:focus-visible {
+    background: var(--signal-bg);
+  }
+
+  .c-handle {
+    font-size: var(--step-0);
+    font-weight: 500;
+    overflow-wrap: anywhere;
+    transition: color 120ms ease;
+  }
+  a:hover .c-handle {
+    color: var(--signal);
+  }
+`;
+
+const Rev = styled.footer`
+  border-top: 1px solid var(--rule);
+  padding-top: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+`;

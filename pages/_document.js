@@ -32,15 +32,15 @@ export default class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <link rel="preload" href="/bg.png" as="image" />
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
                         crossOrigin="true"
                     />
+                    {/* Only the weights actually used: mono 400/500/600, display 600/700 */}
                     <link
-                        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap"
+                        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Saira+Condensed:wght@600;700&display=swap"
                         rel="stylesheet"
                     />
                 </Head>

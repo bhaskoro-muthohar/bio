@@ -1,11 +1,14 @@
+const description =
+    'Bhaskoro Muthohar is a Machine Learning Engineer at StraitsX, working on model deployment and serving, data platform, and internal AI agents. Previously GovTech Edu Indonesia and Bank Jago.';
+
 export default {
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        title: 'Bhaskoro Abdillah Muthohar | Machine Learning & Data Engineer',
+        title: 'Bhaskoro Abdillah Muthohar | Machine Learning Engineer',
         url: 'https://www.itsmebhas.net/',
-        description: 'Bhaskoro Muthohar is a Machine Learning/Data Engineer with expertise in MLOps, data engineering, and infrastructure. Currently at StraitsX, specializing in model deployment and data pipelines.',
-        keywords: 'Bhaskoro Abdillah Muthohar, Bhaskoro Muthohar, machine learning engineer, data engineer, mlops, python developer, sql, bigquery, dbt, airflow, business intelligence, data science, kubernetes, CI/CD, GCP, straitsx',
+        description,
+        keywords: 'Bhaskoro Abdillah Muthohar, Bhaskoro Muthohar, machine learning engineer, ml deployment, mlops, data engineer, python, sql, bigquery, dbt, airflow, sagemaker, kubernetes, CI/CD, GCP, AWS, straitsx',
         images: [
             {
                 width: 800,

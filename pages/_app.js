@@ -2,15 +2,16 @@ import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import Layout from "../components/Layout";
 import GlobalStyle from "../styles/GlobalStyle";
-import { darkTheme, lightTheme } from "../styles/theme.config";
+import theme from "../styles/theme.config";
 import { GoogleAnalytics } from "nextjs-google-analytics";
-import { DefaultSeo } from 'next-seo';
-import SEO from '../next-seo.config';
-import useDarkMode from '../hooks/useDarkMode';
+import { DefaultSeo } from "next-seo";
+import SEO from "../next-seo.config";
+import useDarkMode from "../hooks/useDarkMode";
 
 function MyApp({ Component, pageProps }) {
-    const darkMode = useDarkMode();
-    const theme = darkMode.value ? darkTheme : lightTheme;
+    // Owns the body class only. Colours resolve from CSS custom properties in
+    // GlobalStyle, so the theme never round-trips through a React render.
+    useDarkMode();
 
     return (
         <>
@@ -26,10 +27,6 @@ function MyApp({ Component, pageProps }) {
                         additionalMetaTags={[{
                             name: 'keywords',
                             content: SEO.openGraph.keywords,
-                        },
-                        {
-                            httpEquiv: 'x-ua-compatible',
-                            content: 'IE=edge; chrome=1'
                         }]}
                     />
                     <Component {...pageProps} />
