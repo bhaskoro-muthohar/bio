@@ -1,38 +1,79 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const STORAGE_KEY = 'darkMode';
-const CLASS_DARK = 'dark-mode';
-const CLASS_LIGHT = 'light-mode';
+const KEY = 'theme';
+const LEGACY_KEY = 'darkMode';
+const QUERY = '(prefers-color-scheme: dark)';
+
+export const THEME_CHOICES = ['system', 'light', 'dark'];
+
+function applyClass(dark) {
+  const c = document.body.classList;
+  c.toggle('dark-mode', dark);
+  c.toggle('light-mode', !dark);
+}
+
+function readStored() {
+  try {
+    const stored = localStorage.getItem(KEY);
+    if (stored === 'light' || stored === 'dark') return stored;
+    // one-time migration from the old boolean key
+    const legacy = localStorage.getItem(LEGACY_KEY);
+    if (legacy === 'true') return 'dark';
+    if (legacy === 'false') return 'light';
+  } catch (e) {
+    // localStorage unavailable (private mode, blocked cookies)
+  }
+  return 'system';
+}
 
 /**
- * Custom dark mode hook. Always initializes as light (matching SSR output)
- * then reads the actual theme from the body class after hydration.
- * The inline script in _document.js handles the visual flash via CSS vars
- * on body — this hook syncs the styled-components ThemeProvider after mount.
+ * Three-state theme control: 'system' (the default) follows the OS and keeps
+ * following it, 'light'/'dark' pin the choice and persist it.
+ *
+ * State starts at 'system' so the client render matches the server's. The
+ * painted theme comes from the inline script in _document.js, which runs
+ * before first paint, so nothing flashes while this hook catches up. The
+ * `ready` gate matters: without it the persistence effect would run once with
+ * the pre-hydration default and overwrite a stored preference.
  */
 export default function useDarkMode() {
-  // Always start light to match server-rendered markup
-  const [value, setValue] = useState(false);
+  const [choice, setChoice] = useState('system');
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    // After hydration, read what the noflash script actually set
-    const isDark = document.body.classList.contains(CLASS_DARK);
-    setValue(isDark);
+    setChoice(readStored());
+    setReady(true);
   }, []);
 
   useEffect(() => {
-    document.body.classList.toggle(CLASS_DARK, value);
-    document.body.classList.toggle(CLASS_LIGHT, !value);
+    if (!ready) return undefined;
+
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+      if (choice === 'system') {
+        localStorage.removeItem(KEY);
+        localStorage.removeItem(LEGACY_KEY);
+      } else {
+        localStorage.setItem(KEY, choice);
+      }
     } catch (e) {
-      // localStorage unavailable
+      // preference simply won't persist
     }
-  }, [value]);
 
-  const toggle = useCallback(() => setValue(v => !v), []);
-  const enable = useCallback(() => setValue(true), []);
-  const disable = useCallback(() => setValue(false), []);
+    if (choice !== 'system') {
+      applyClass(choice === 'dark');
+      return undefined;
+    }
 
-  return { value, toggle, enable, disable };
+    const mql = window.matchMedia(QUERY);
+    applyClass(mql.matches);
+    const onChange = (event) => applyClass(event.matches);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, [choice, ready]);
+
+  const select = useCallback((next) => {
+    if (THEME_CHOICES.includes(next)) setChoice(next);
+  }, []);
+
+  return { choice, select, ready };
 }

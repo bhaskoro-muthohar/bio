@@ -32,32 +32,36 @@ export default class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <link rel="preload" href="/bg.png" as="image" />
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
                         crossOrigin="true"
                     />
+                    {/* Only the weights actually used: mono 400/500/600, display 600/700 */}
                     <link
-                        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap"
+                        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Saira+Condensed:wght@600;700&display=swap"
                         rel="stylesheet"
                     />
                 </Head>
                 <body>
+                    {/* Paints the theme before first paint. Reads only — an
+                        absent preference means "follow the OS", so persisting
+                        here would freeze the first OS value forever. */}
                     <script dangerouslySetInnerHTML={{ __html: `
 (function(){
-  var storageKey='darkMode';
-  var classNameDark='dark-mode';
-  var classNameLight='light-mode';
-  function setClass(d){document.body.classList.add(d?classNameDark:classNameLight);document.body.classList.remove(d?classNameLight:classNameDark)}
-  var preferDarkQuery='(prefers-color-scheme: dark)';
-  var mql=window.matchMedia(preferDarkQuery);
-  var stored=null;
-  try{stored=localStorage.getItem(storageKey)}catch(e){}
-  if(stored!==null){setClass(JSON.parse(stored))}
-  else if(mql.media===preferDarkQuery){setClass(mql.matches);try{localStorage.setItem(storageKey,mql.matches)}catch(e){}}
-  else{setClass(false)}
+  var c=document.body.classList,t='system';
+  try{
+    var s=localStorage.getItem('theme');
+    if(s==='light'||s==='dark'){t=s}
+    else{var l=localStorage.getItem('darkMode');if(l==='true'){t='dark'}else if(l==='false'){t='light'}}
+  }catch(e){}
+  var d=t==='dark';
+  if(t==='system'){
+    try{d=window.matchMedia('(prefers-color-scheme: dark)').matches}catch(e){d=false}
+  }
+  c.add(d?'dark-mode':'light-mode');
+  c.remove(d?'light-mode':'dark-mode');
 })();
                     `}} />
                     <Main />

@@ -1,6 +1,65 @@
 import { NextSeo } from 'next-seo';
 import seoData from '../next-seo.config';
 
+const PERSON_ID = 'https://www.itsmebhas.net/#person';
+
+const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+        {
+            '@type': 'Person',
+            '@id': PERSON_ID,
+            name: 'Bhaskoro Abdillah Muthohar',
+            alternateName: 'Bhaskoro Muthohar',
+            url: seoData.openGraph.url,
+            jobTitle: 'Machine Learning Engineer',
+            image: seoData.openGraph.images[0].url,
+            alumniOf: ['GovTech Edu Indonesia', 'Bank Jago'],
+            knowsAbout: [
+                'Machine Learning Engineering',
+                'Model Deployment',
+                'MLOps',
+                'Data Engineering',
+                'Python',
+                'SQL',
+                'BigQuery',
+                'dbt',
+                'Airflow',
+                'Amazon SageMaker',
+                'GCP',
+                'AWS',
+                'Terraform',
+            ],
+            worksFor: {
+                '@type': 'Organization',
+                name: 'StraitsX',
+            },
+            sameAs: [
+                'https://github.com/bhaskoro-muthohar',
+                'https://www.linkedin.com/in/bhaskoro-muthohar',
+                'https://twitter.com/Br__AM',
+                'https://instagram.com/bhaskoro.muthohar',
+            ],
+        },
+        {
+            '@type': 'ScholarlyArticle',
+            name: "Application of A/B Testing Experimentation on Government Digital Products to Enhance Teachers' Skills and Capabilities in Indonesia",
+            url: 'https://journal.unesa.ac.id/index.php/jpsi/article/view/20964',
+            datePublished: '2023',
+            isPartOf: {
+                '@type': 'Periodical',
+                name: 'JPSI (Journal of Public Sector Innovations)',
+            },
+            author: [
+                { '@type': 'Person', name: 'Bagoes Rahmat Widiarso' },
+                { '@id': PERSON_ID },
+                { '@type': 'Person', name: 'Septi Rito Tombe' },
+                { '@type': 'Person', name: 'Putri Wikie Novianti' },
+            ],
+        },
+    ],
+};
+
 export default function Seo() {
     return (
         <>
@@ -29,54 +88,25 @@ export default function Seo() {
                     site: '@Br__AM',
                     cardType: 'summary',
                 }}
-                additionalMetaTags={[{
-                    name: 'keywords',
-                    content: seoData.openGraph.keywords,
-                },
-                {
-                    name: 'twitter:image',
-                    content: seoData.openGraph.images[0].url,
-                },
-                {
-                    httpEquiv: 'x-ua-compatible',
-                    content: 'IE=edge; chrome=1'
-                }]}
+                additionalMetaTags={[
+                    {
+                        name: 'keywords',
+                        content: seoData.openGraph.keywords,
+                    },
+                    {
+                        name: 'twitter:image',
+                        content: seoData.openGraph.images[0].url,
+                    },
+                ]}
                 robotsProps={{
-                    nosnippet: false,
-                    notranslate: false,
-                    noimageindex: false,
-                    noarchive: false,
                     maxSnippet: -1,
                     maxImagePreview: 'large',
                     maxVideoPreview: -1,
                 }}
-                additionalLinkTags={[]}
             />
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        '@context': 'https://schema.org',
-                        '@type': 'Person',
-                        name: 'Bhaskoro Abdillah Muthohar',
-                        alternateName: 'Bhaskoro Muthohar',
-                        url: seoData.openGraph.url,
-                        jobTitle: 'Machine Learning/Data Engineer',
-                        image: seoData.openGraph.images[0].url,
-                        alumniOf: ['Bank Jago', 'GovTech Edu Indonesia'],
-                        knowsAbout: ['Data Engineering', 'Machine Learning', 'MLOps', 'Python', 'SQL', 'BigQuery', 'dbt', 'Airflow', 'Kubernetes', 'CI/CD', 'GCP'],
-                        worksFor: {
-                            '@type': 'Organization',
-                            name: 'StraitsX'
-                        },
-                        sameAs: [
-                            'https://github.com/bhaskoro-muthohar',
-                            'https://www.linkedin.com/in/bhaskoro-muthohar',
-                            'https://twitter.com/Br__AM',
-                            'https://instagram.com/bhaskoro.muthohar'
-                        ]
-                    })
-                }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
         </>
     );
