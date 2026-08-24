@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import Layout from "../components/Layout";
 import GlobalStyle from "../styles/GlobalStyle";
@@ -14,9 +13,6 @@ function MyApp({ Component, pageProps }) {
         <>
             <GoogleAnalytics />
             <ThemeProvider theme={theme}>
-                <Head>
-                    <link rel="icon" href="/favicon.ico" />
-                </Head>
                 <GlobalStyle />
                 <Layout>
                     <DefaultSeo
