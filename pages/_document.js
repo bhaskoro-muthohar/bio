@@ -32,6 +32,12 @@ export default class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
+                    {/* SVG first for browsers that support it — it is sharp at
+                        any size and follows the viewer's colour scheme. The
+                        .ico carries 16/32/48 for everything older. */}
+                    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+                    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+                    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link
                         rel="preconnect"

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Unit operation with inlet and outlet">
+  <!-- Ground. Drawn rather than transparent so the mark holds on any tab colour. -->
+  <rect width="64" height="64" fill="#0B1417"/>
+
+  <!-- Inlet and outlet: material entering and leaving the unit. -->
+  <path d="M2 32h13M49 32h13" stroke="#5FB3C4" stroke-width="6" stroke-linecap="butt"/>
+
+  <!-- The unit operation itself. -->
+  <rect x="15" y="15" width="34" height="34" fill="none" stroke="#E8A33D" stroke-width="6"/>
+
+  <style>
+    /* SVG favicons render in an isolated context: no web fonts, but media
+       queries do apply, so the mark can follow the viewer's theme. */
+    @media (prefers-color-scheme: light) {
+      rect:first-of-type { fill: #E2E8E6; }
+      rect:last-of-type  { stroke: #8A4F0F; }
+      path               { stroke: #1F5F6D; }
+    }
+  </style>
+</svg>
